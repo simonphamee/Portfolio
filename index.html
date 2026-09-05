@@ -547,7 +547,8 @@
             border-bottom: none;
         }
         .project-info { flex: 2; min-width: 0; }
-        .project-desc { color: var(--text-soft); margin-top: 10px; }
+        .project-bullets { margin-top: 10px; }
+        .project-bullets li:last-child { margin-bottom: 0; }
         .project-actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
 
         .project-media { flex: 1; min-width: 230px; }
@@ -593,91 +594,6 @@
         .poster-card a:hover img { transform: scale(1.02); }
 
         .research-actions { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
-
-        /* ============================================================
-           CODE BLOCK + COPY
-           ============================================================ */
-        .code-details {
-            margin-top: 16px;
-            border: 1px solid var(--border-strong);
-            border-radius: var(--radius);
-            background: var(--code-bg);
-            overflow: hidden;
-        }
-        .code-summary {
-            list-style: none;
-            padding: 12px 16px;
-            background: var(--code-bar);
-            color: var(--code-text);
-            font-family: "JetBrains Mono", monospace;
-            font-weight: 600;
-            font-size: var(--fs-sm);
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background-color var(--t-fast);
-        }
-        .code-summary::-webkit-details-marker { display: none; }
-        .code-summary:hover { background: #1a2942; }
-        .code-summary .chevron {
-            transition: transform var(--t);
-            color: var(--sky-400);
-            display: inline-flex;
-        }
-        .code-details[open] .code-summary .chevron { transform: rotate(90deg); }
-
-        .code-toolbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 12px 8px 16px;
-            background: var(--code-bar);
-            border-top: 1px solid rgba(255,255,255,0.06);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            position: sticky;
-            top: 0;
-            z-index: 2;
-        }
-        .code-toolbar .file-name {
-            font-family: "JetBrains Mono", monospace;
-            font-size: var(--fs-xs);
-            color: #7e93b5;
-            letter-spacing: 0.03em;
-        }
-        .copy-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            font-family: "JetBrains Mono", monospace;
-            font-size: var(--fs-xs);
-            font-weight: 600;
-            color: var(--code-text);
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 8px;
-            padding: 6px 11px;
-            cursor: pointer;
-            transition: background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
-        }
-        .copy-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.22); }
-        .copy-btn.copied { color: #6ee7a8; border-color: rgba(110,231,168,0.4); background: rgba(110,231,168,0.08); }
-        .copy-btn svg { width: 14px; height: 14px; }
-
-        .code-block {
-            margin: 0;
-            padding: 16px;
-            color: var(--code-text);
-            font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
-            font-size: 0.82rem;
-            overflow-x: auto;
-            max-height: 420px;
-            overflow-y: auto;
-            white-space: pre;
-            line-height: 1.55;
-            tab-size: 4;
-        }
 
         /* ============================================================
            SKILLS
@@ -833,6 +749,133 @@
         .modal-row a { color: var(--accent); text-decoration: none; font-weight: 600; }
         .modal-row a:hover { text-decoration: underline; }
         .modal-row .static { color: var(--text-soft); font-weight: 600; }
+
+        /* ============================================================
+           PROJECT PHOTO GALLERY
+           ============================================================ */
+        .gallery-trigger { min-height: 44px; font-size: 0.875rem; }
+        .gallery-trigger svg { flex: none; }
+        html.gallery-open, html.gallery-open body { overflow: hidden; }
+        .gallery-dialog {
+            width: min(1040px, calc(100% - 32px));
+            max-width: none;
+            max-height: calc(100vh - 32px);
+            max-height: calc(100dvh - 32px);
+            margin: auto;
+            padding: 0;
+            color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+        .gallery-dialog::backdrop {
+            background: rgba(6, 11, 22, 0.78);
+            backdrop-filter: blur(6px);
+        }
+        .gallery-content { padding: clamp(18px, 3vw, 30px); }
+        .gallery-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+            padding-bottom: 22px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .gallery-header .eyebrow { margin: 0 0 8px; font-size: 0.875rem; }
+        .gallery-header h2 {
+            margin: 0;
+            color: var(--heading);
+            font-size: clamp(1.15rem, 1rem + 0.8vw, 1.6rem);
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+        }
+        .gallery-close {
+            display: grid;
+            place-items: center;
+            flex: none;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            background: var(--surface-2);
+            color: var(--text-soft);
+            cursor: pointer;
+        }
+        .gallery-close:hover { color: var(--accent); border-color: var(--accent); }
+        .gallery-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.8fr) minmax(200px, 1fr);
+            gap: 26px;
+            align-items: start;
+        }
+        .gallery-visual { min-width: 0; margin: 0; }
+        .gallery-stage {
+            display: grid;
+            place-items: center;
+            height: clamp(220px, 48vh, 500px);
+            height: clamp(220px, 48dvh, 500px);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface-2);
+        }
+        .gallery-stage img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+        .gallery-stage img[hidden], .gallery-stage p[hidden] { display: none; }
+        .gallery-stage p { margin: 0; padding: 28px; text-align: center; color: var(--text-muted); }
+        .gallery-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .gallery-controls .btn { min-height: 44px; padding: 10px 12px; font-size: 0.875rem; }
+        .gallery-controls .btn:disabled { opacity: 0.45; cursor: default; transform: none; box-shadow: none; }
+        .gallery-counter { color: var(--text-muted); font-size: 0.875rem; text-align: center; font-variant-numeric: tabular-nums; }
+        .gallery-thumbnails { display: flex; gap: 10px; overflow-x: auto; padding: 6px; margin: 14px -6px 0; }
+        .gallery-thumbnails[hidden] { display: none; }
+        .gallery-thumb {
+            position: relative;
+            flex: 0 0 80px;
+            height: 66px;
+            padding: 3px;
+            border: 2px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            background: var(--surface-3);
+            color: var(--heading);
+            font: inherit;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .gallery-thumb:hover, .gallery-thumb[aria-pressed="true"] { border-color: var(--accent); }
+        .gallery-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 5px; }
+        .gallery-thumb img[hidden] { display: none; }
+        .gallery-thumb span {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            min-width: 24px;
+            padding: 0 5px;
+            border-radius: 4px;
+            color: var(--text);
+            background: var(--surface);
+            font-size: 0.875rem;
+            font-variant-numeric: tabular-nums;
+        }
+        .gallery-caption { overflow-wrap: anywhere; }
+        .gallery-caption h3 { color: var(--heading); font-size: 1.1rem; margin: 0 0 12px; line-height: 1.5; }
+        .gallery-caption p { margin: 0; color: var(--text-soft); font-size: 1rem; line-height: 1.75; white-space: pre-line; }
+        @media (max-width: 720px) {
+            .gallery-layout { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+            .gallery-dialog { width: calc(100% - 20px); max-height: calc(100dvh - 20px); }
+            .gallery-header { margin-bottom: 18px; padding-bottom: 18px; }
+            .gallery-stage { height: clamp(220px, 38dvh, 380px); }
+        }
 
         /* ============================================================
            RESPONSIVE
@@ -1001,7 +1044,7 @@
         <p class="eyebrow">Research</p>
         <h2>Research Experience</h2>
 
-        <div class="project-container">
+        <div class="project-container" data-project="research">
             <div class="project-info">
                 <div class="item-header">
                     <span>Undergraduate Research Assistant</span>
@@ -1010,16 +1053,20 @@
                 <div class="item-sub">
                     <span>Ubiquitous Communication and Networking (UCaN) Lab</span>
                 </div>
-                <ul>
-                    <li>Deployed a multi-node wireless testbed on Raspberry Pi hardware, collecting RSSI and throughput measurements to build training datasets for ML algorithms.</li>
-                    <li>Automated data collection and experimental parameter control using XMLRPC and ZMQ Python services orchestrated across the Raspberry Pi node network.</li>
-                    <li>Tuned distributed spectrum-sensing (DSS) submodels, raising consensus accuracy to ~95% and improving decision speed by ~20%.</li>
-                    <li>Stood up a Linux (Ubuntu) testbed controller to drive software-defined radio (SDR) spectrum-sensing experiments and coordinate Raspberry Pi nodes.</li>
-                    <li>Developed MATLAB probability-density-function models to characterize detection thresholds, reducing false-detection rates in the DSS algorithm.</li>
-                    <li>Authored Bash automation on the testbed controller to securely transfer Python scripts and CSV datasets to and from each node and archive experimental runs.</li>
+                <ul class="project-bullets">
+                    <li>Deployed and Implemented a multi-node wireless network via Raspberry Pis, collecting RSSI and throughput measurements for ML Algorithm Training</li>
+                    <li>Automated data collection and controlled experimental parameters XMLRPC, ZMQ Python scripts, implementing on Raspberry Pi node networks</li>
+                    <li>Modified Distributed Spectrum Sensing Algorithm submodels, increasing consensus accuracy to ∼95% and improving decision speed by ∼20%</li>
+                    <li>Integrated Linux-based Testbed Controller (Ubuntu) to support Software Defined Radio spectrum sensing experiments and Raspberry Pi control</li>
+                    <li>Developed MATLAB probability density function models to characterize detection thresholds, reducing false detection rates in the DSS algorithm</li>
+                    <li>Wrote and Deployed Bash scripts for testbed controller to Raspberry Pi, to transfer Python scripts, CSV files, and to save collected experimential data</li>
                 </ul>
 
                 <div class="research-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="research" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for Distributed Spectrum Sensing Research">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
                     <a href="NewSDR2026.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
                         <span aria-hidden="true">📊</span> NEWSDR Poster
                     </a>
@@ -1044,7 +1091,7 @@
         <p class="eyebrow">Engineering Projects</p>
         <h2>Engineering Projects</h2>
 
-        <div class="project-container">
+        <div class="project-container" data-project="drone">
             <div class="project-info">
                 <div class="item-header">
                     <span>STM32 Drone Health Monitoring System</span>
@@ -1053,10 +1100,17 @@
                 <div class="item-sub">
                     <span>Firmware &amp; Embedded Systems Engineer · UMass Boston Robotics Club</span>
                 </div>
-                <p class="project-desc">
-                    Built an embedded diagnostic system that ingests real-time electronic speed controller (ESC) telemetry on an STM32 microcontroller. Across 30+ instrumented flight trials, I sampled bus voltage, phase current, temperature, and motor-RPM transients, then fused them into a lightweight predictive model that raised edge health-tracking accuracy to 97% and cut false alarms by 25%. Telemetry streams into a custom Python dashboard on a 10 ms refresh loop.
-                </p>
+                <ul class="project-bullets">
+                    <li>Built and deployed in C a functional project prototype using Arduino, successfully integrating sample ML algorithm into PCB flight controller</li>
+                    <li>Ran 30+ motor health tests for Machine Learning Algorithm Training, using real time collected voltage, current, temperature, and RPM measurements</li>
+                    <li>Reduced false drone health alerts by 25%, maintaining 97% Drone Health Accuracy through algorithm training and tuning, validated with 300+ tests</li>
+                    <li>Deployed C code for STM32 microcontroller, to process ESC telemetry and monitor drone health in a local Python based UI with 10 ms updates</li>
+                </ul>
                 <div class="project-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="drone" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for STM32 Drone Health Monitoring System">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
                     <a href="https://youtu.be/YSZShgu7DEg" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
                         <span aria-hidden="true">▶</span> Watch Test Video
                     </a>
@@ -1067,30 +1121,7 @@
             </div>
         </div>
 
-        <div class="project-container">
-            <div class="project-info">
-                <div class="item-header">
-                    <span>Raspberry Pi Piano Learning System</span>
-                    <span class="meta-date">Feb 2026 – May 2026</span>
-                </div>
-                <div class="item-sub">
-                    <span>Embedded Hardware &amp; Software Lead</span>
-                </div>
-                <p class="project-desc">
-                    Designed a bare-metal learning platform on a Raspberry Pi that maps musical sequences to real-time hardware feedback. Custom Python libraries parse structured note configurations into direct GPIO bit patterns, driving multi-color LED indicators across a breadboard circuit. MATLAB tracking scripts then quantify user accuracy gains across successive training trials.
-                </p>
-                <div class="project-actions">
-                    <a href="https://www.youtube.com/watch?v=3e2C7K4MX78" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
-                        <span aria-hidden="true">▶</span> Watch Test Video
-                    </a>
-                </div>
-            </div>
-            <div class="project-media">
-                <img src="Piano.jpg" alt="Raspberry Pi GPIO breadboard circuit driving LED indicators" onerror="imgFallback(this)">
-            </div>
-        </div>
-
-        <div class="project-container">
+        <div class="project-container" data-project="am-radio">
             <div class="project-info">
                 <div class="item-header">
                     <span>AM Radio Receiver &amp; Transmitter</span>
@@ -1099,10 +1130,17 @@
                 <div class="item-sub">
                     <span>Analog Hardware Project</span>
                 </div>
-                <p class="project-desc">
-                    Designed and tuned a high-selectivity analog AM receiver from discrete components to capture local Boston broadcasts at 680, 850, and 1510 kHz. The signal chain pairs an adjustable LC bandpass filter with a diode envelope detector and an LM386 audio power stage. Careful layout and grounding suppressed the noise floor by 5 dB, delivering clean voice recovery across dozens of bench tests.
-                </p>
+                <ul class="project-bullets">
+                    <li>Implemented bandpass filter receiving 680 kHz, 850 kHz, and 1510 kHz radio waves, verifying real time audio from Boston radio stations</li>
+                    <li>Optimized RC filters lowering noise floor by ∼15% and reducing noise by ∼5 dB for clearer recovered speech, validated over 30+ test trials</li>
+                    <li>Designed and deployed a diode based envelope detector to rectify and demodulate AM audio signal from varying radio station carrier waves</li>
+                    <li>Designed, built, and tuned an LM386 audio amplifier stage with variable gain (5x–20x) for user controlled volume adjustment</li>
+                </ul>
                 <div class="project-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="am-radio" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for AM Radio Receiver &amp; Transmitter">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
                     <a href="https://youtu.be/d3Bmgt7xNro" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
                         <span aria-hidden="true">▶</span> Watch Test Video
                     </a>
@@ -1113,500 +1151,7 @@
             </div>
         </div>
 
-        <div class="project-container">
-            <div class="project-info">
-                <div class="item-header">
-                    <span>FM Radio Receiver</span>
-                    <span class="meta-date">Nov 2025 – Dec 2025</span>
-                </div>
-                <div class="item-sub">
-                    <span>RF Hardware Project</span>
-                </div>
-                <p class="project-desc">
-                    Assembled and characterized an FM receiver to study RF front-end behavior, tuning, and audio demodulation. Verified operation across local FM stations and analyzed antenna effects on reception quality, reinforcing core RF signal-chain and analog-filtering fundamentals.
-                </p>
-                <div class="project-actions">
-                    <a href="https://www.youtube.com/watch?v=XOqjRsTT-Tc" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
-                        <span aria-hidden="true">▶</span> Watch Test Video
-                    </a>
-                </div>
-            </div>
-            <div class="project-media">
-                <img src="FMRadio.jpg" alt="FM radio receiver assembly" onerror="imgFallback(this)">
-            </div>
-        </div>
-
-        <div class="project-container">
-            <div class="project-info">
-                <div class="item-header">
-                    <span>Digital AM Communication System</span>
-                    <span class="meta-date">Nov 2025 – Dec 2025</span>
-                </div>
-                <div class="item-sub">
-                    <span>MATLAB Signals &amp; Systems Project</span>
-                </div>
-                <p class="project-desc">
-                    Implemented a complete digital AM communication chain in MATLAB to apply core signals-and-systems theory to real audio. The pipeline modulates a baseband signal onto a 20 kHz carrier, verifies the frequency translation with FFT analysis, and recovers it through coherent demodulation and FIR low-pass filtering. Delay and echo effects are modeled and then removed with an inverse IIR filter. Results match theory across frequency shifting, filter frequency response, time-domain convolution, Z-transform analysis, and the Nyquist sampling criterion.
-                </p>
-
-                <details class="code-details">
-                    <summary class="code-summary">
-                        <span class="chevron" aria-hidden="true">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-                        </span>
-                        View Complete MATLAB Implementation
-                    </summary>
-                    <div class="code-toolbar">
-                        <span class="file-name">digital_am_system.m</span>
-                        <button class="copy-btn" type="button" onclick="copyCode(this)" aria-label="Copy MATLAB code">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-                            <span class="copy-label">Copy code</span>
-                        </button>
-                    </div>
-                    <pre class="code-block"><code>clc; 
-clear; 
-close all; 
-
-%% Load Signal
-% Audio Sample [Sampling Rate = 192k]
-[y192, Fs192] = audioread("inputData/myName192kHz.wav");
-
-%% Variables
-% Limit Frequency Range [0 to (192k/2=)96k] (I use 200Hz so it runs faster)
-freq_limit = 200; 
-
-% Carrier Frequency For AM Modulation
-Fc = 20000;
-
-% Cutoff Frequency For AM Demodulation Lowpass [Human Voice: ~0 to ~20k]
-cutoff = 20000;
-
-% Filter length [Higher = More Resolution]
-M = 501;
-
-% Delay For Voice in Seconds
-delaySec = 0.1;
-
-% Attenuating Volume [0 to 1]
-volume = 0.6;
-
-%% Plotting Original Signal
-% Discrete Number Of Values
-N = length(y192);
-n = 0:N-1;
-
-% Discrete Number Of Values / Sample Rate To Get Time Vector
-t192 = n / Fs192;
-
-% Plotting Time Domain Signal
-figure;
-subplot(4, 2, 1);
-plot(t192, y192, 'b');
-title('Original Audio - Time Domain');
-xlabel('Time (s)');
-ylabel('Magnitude');
-soundOriginal = audioplayer(y192, Fs192, 24);
-
-% Frequency Limit To See Human Voice In The Signal
-K = round(freq_limit * N / Fs192);
-
-% Manually Calculated FFT
-f192 = zeros(K, 1);
-for k = 1:K
-     f192(k) = sum(y192(:, 1) .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-freqs = (0:k-1) * Fs192 / N;
-
-% Plotting Frequency Domain Signal
-subplot(4, 2, 2);
-plot(freqs, abs(f192));
-title('Original Audio - Frequency Domain');
-xlabel('Frequency (Hz)');
-ylabel('Magnitude');
-
-%% AM Modulation
-% Carrier Wave
-carrier = cos(2 * pi * Fc * t192);
-
-% Messenger Wave Modulated With Carrier Wave - - - AM Signal
-am_signal = ((1 + y192(:, 1)') .* carrier).';
-
-% Plotting Time Domain Signal
-subplot(4, 2, 3);
-plot(t192, am_signal, 'b');
-title('AM Modulation - Time Domain');
-xlabel('Time (s)'); 
-ylabel('Magnitude');
-soundModulated = audioplayer(am_signal, Fs192, 24);
-
-% Manually Calculated FFT
-f_am = zeros(K, 1);
-for k = 1:K
-    f_am(k) = sum(am_signal(:, 1) .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-
-% Plotting Frequency Domain Signal
-subplot(4, 2, 4);
-plot(freqs, abs(f_am));
-title('AM Modulation - Frequency Domain');
-xlabel('Frequency (Hz)'); 
-ylabel('Magnitude');
-
-%% AM Demodulation FIR
-% Coherent Demodulation
-demod_raw = am_signal.' .* carrier;
-
-% Normalized to Sample Rate
-wc = 2 * pi * cutoff / Fs192;
-
-% Filter length & MSE
-m = 0:M-1;
-alpha = (M - 1) / 2;
-
-% Low Pass With Sinc Impulse Response
-h = sin(wc * (m - alpha)) ./ (pi * (m - alpha));
-h(alpha + 1) = wc / pi;
-h = h / sum(h);
-
-% Plotting Impulse Response
-subplot(4, 2, 5);
-plot(0:M-1, h); grid on;
-title('Transfer Function - Coefficients');
-xlabel('Index');
-ylabel('Magnitude');
-
-% Manually Calculated FFT
-H = zeros(K, 1);
-for k = 1:K
-    H(k) = sum(h .* exp(-1j * 2 * pi * (k - 1) / K * m));
-end
-
-% Frequency Range to Show All of Transfer Function
-fTrans = (0:K-1) * Fs192 / K;
-
-% Limiting Range because Transfer Function Turns to a 'U' else wise.
-nyquist = fTrans &lt;= Fs192 / 2;
-
-% Plotting Frequency Response
-subplot(4, 2, 6);
-plot(fTrans(nyquist), 20 * log10(abs(H(nyquist)))); grid on;
-title('Transfer Function - Frequency Response');
-xlabel('Frequency (Hz)');
-ylabel('Magnitude');
-
-% Manually Calculated FIR
-demod_signal = zeros(N, 1);
-for i = 1:N
-    for j = 1:M
-        if (i - j + 1 > 0)
-            demod_signal(i) = demod_signal(i) + demod_raw(i - j + 1) * h(j);
-        end
-    end
-end
-demod_signal = demod_signal - mean(demod_signal);
-demod_signal = 2 * demod_signal;
-
-% Plotting Time Domain Signal
-subplot(4, 2, 7);
-plot(t192, demod_signal, 'b');
-title('Demodulated Signal - Time Domain');
-xlabel('Time (s)'); 
-ylabel('Magnitude');
-soundDemodulated = audioplayer(demod_signal, Fs192, 24);
-
-% Manually Calculated FFT
-f_demod = zeros(K, 1);
-for k = 1:K
-    f_demod(k) = sum(demod_signal(:, 1) .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-
-% Plotting Frequency Domain Signal
-subplot(4, 2, 8);
-plot(freqs, abs(f_demod));
-title('Demodulated Signal - Frequency Domain');
-xlabel('Frequency (Hz)'); 
-ylabel('Magnitude');
-
-%% Plotting Original Signal For Next Graphs
-% Plotting Time Domain Signal
-figure;
-subplot(4, 2, 1);
-plot(t192, y192, 'b');
-title('Original Audio - Time Domain');
-xlabel('Time (s)');
-ylabel('Magnitude');
-
-% Plotting Frequency Domain Signal
-subplot(4, 2, 2);
-plot(freqs, abs(f192));
-title('Original Audio - Frequency Domain');
-xlabel('Frequency (Hz)');
-ylabel('Magnitude');
-
-%% Creating Delay
-% Delay samples
-delaySamples = round(delaySec * Fs192);
-
-% Delay Time Signal
-yDelay(:, 1) = y192(:, 1);
-for i = (delaySamples + 1):N
-    yDelay(i, 1) = y192(i, 1) + volume * y192(i - delaySamples, 1);
-end
-
-% Plotting Time Domain Signal
-subplot(4, 2, 3);
-plot(t192, yDelay, 'b');
-title('Delayed Audio - Time Domain');
-xlabel('Time (s)');
-ylabel('Magnitude');
-soundDelay = audioplayer(yDelay, Fs192, 24);
-
-% Delay Frequency Signal
-fDelay = zeros(K, 1);
-for k = 1:K
-    fDelay(k) = sum(yDelay(:, 1) .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-
-% Plotting Frequency Domain Signal
-subplot(4, 2, 4);
-plot(freqs, abs(fDelay));
-title('Delayed Audio - Frequency Domain');
-xlabel('Time (s)');
-ylabel('Magnitude');
-
-%% Removing Delay With IIR
-yClean = zeros(size(yDelay));
-for i = 1:N
-    if i > delaySamples % Meaning delaySec Has Passed
-        yClean(i, 1) = -volume * yClean(i - delaySamples, 1) + yDelay(i, 1);
-    else % Meaning Delay Hasn't Started Yet
-        yClean(i, 1) = yDelay(i, 1);
-    end
-end
-
-% Transfer Function Formula From Slides H(e^(jw)) = 1/(1-ae^(-jw))
-co = zeros(1, delaySamples + 1);
-co(1) = 1;
-co(end) = -volume;
-H = zeros(size(freqs));
-for k = 1:K
-    H(k) = 1 ./ (co * (exp(-1j * 2 * pi * freqs(k) / Fs192 * (0:delaySamples))).');
-end
-
-% Plotting Coefficients
-subplot(4, 2, 5);
-hold on;
-stem(0:length(co)-1, co, 'filled');
-stem(0:length(1)-1, 1, 'filled');
-hold off;
-title('Transfer Function - Coefficients');
-xlabel('Index');
-ylabel('Magnitude');
-legend('denominator', 'numerator');
-
-% Plotting Magnitude Response
-subplot(4, 2, 6);
-plot(freqs, abs(H), 'b');
-title('Transfer Function - Magnitude Response');
-xlabel('Frequency (Hz)');
-ylabel('Magnitude');
-
-% Plotting Time Domain Signal
-subplot(4, 2, 7);
-plot(t192, yClean, 'b');
-title('Clean Audio - Time Domain');
-xlabel('Time (s)');
-ylabel('Magnitude');
-soundClean = audioplayer(yClean, Fs192, 24);
-
-% Manually Calculated FFT
-fClean = zeros(K, 1);
-for k = 1:K
-    fClean(k) = sum(yClean(:, 1) .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-
-% Plotting Frequency Domain Signal
-subplot(4, 2, 8);
-plot(freqs, abs(fClean));
-title('Clean Audio - Frequency Domain');
-xlabel('Time (s)');
-ylabel('Magnitude');
-
-%% Mod -> Demod -> Delay -> DeDelay
-% Redefine the signal length and index vector
-x = y192(:, 1);
-N = length(x);
-n = 0:N-1;
-
-% AM Modulation
-carrier2 = cos(2 * pi * Fc * t192).';
-am_signal2 = (1 + x) .* carrier2;
-
-% AM Coherent Demodulation
-demod_raw2 = am_signal2 .* carrier2;
-
-% FIR Lowpass
-wc = 2 * pi * cutoff / Fs192;
-m = 0:M-1;
-alpha = (M - 1) / 2;
-h = sin(wc * (m - alpha)) ./ (pi * (m - alpha));
-h(alpha + 1) = wc / pi;
-h = h / sum(h);
-
-% Transfer function FFT display
-Hlp = zeros(K, 1);
-for k = 1:K
-    Hlp(k) = sum(h .* exp(-1j * 2 * pi * (k - 1) / K * m));
-end
-fTrans = (0:K-1) * Fs192 / K;
-nyquist = fTrans &lt;= Fs192 / 2;
-
-% Manual FIR Convolution
-demod_signal2 = zeros(N, 1);
-for i = 1:N
-    for j = 1:M
-        if (i - j + 1 > 0)
-            demod_signal2(i) = demod_signal2(i) + demod_raw2(i - j + 1) * h(j);
-        end
-    end
-end
-demod_signal2 = demod_signal2 - mean(demod_signal2);
-demod_signal2 = 2 * demod_signal2;
-soundDemodulated2 = audioplayer(demod_signal2, Fs192, 24);
-
-% Delay (applying to the DEMOD signal)
-delaySamples = round(delaySec * Fs192);
-yDelay2 = demod_signal2;
-for i = (delaySamples + 1):N
-    yDelay2(i, 1) = demod_signal2(i, 1) + volume * demod_signal2(i - delaySamples, 1);
-end
-soundDelay2 = audioplayer(yDelay2, Fs192, 24);
-
-% Removing Delay With IIR (inverse comb)
-yClean2 = zeros(size(yDelay2));
-for i = 1:N
-    if i > delaySamples
-        yClean2(i, 1) = yDelay2(i, 1) - volume * yClean2(i - delaySamples, 1);
-    else
-        yClean2(i, 1) = yDelay2(i, 1);
-    end
-end
-soundClean2 = audioplayer(yClean2, Fs192, 24);
-
-%% Time & Freq Domain Plots for (Original, Mod2, Demod2, Delay2, and DeDelay2)
-figure;
-
-% Original (Time Domain)
-subplot(5, 2, 1);
-plot(t192, x, 'b');
-title('Original - Time Domain');
-xlabel('Time (s)'); ylabel('Magnitude');
-
-% Original (Frequency Domain)
-f_orig2 = zeros(K, 1);
-for k = 1:K
-    f_orig2(k) = sum(x .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-subplot(5, 2, 2);
-plot(freqs, abs(f_orig2), 'b');
-title('Original - Frequency Domain');
-xlabel('Frequency (Hz)'); ylabel('Magnitude');
-
-% AM Mod (Time Domain)
-subplot(5, 2, 3);
-plot(t192, am_signal2, 'b');
-title('AM Modulated (Mod2) - Time Domain');
-xlabel('Time (s)'); ylabel('Magnitude');
-
-% AM Mod (Frequency Domain)
-f_am2 = zeros(K, 1);
-for k = 1:K
-    f_am2(k) = sum(am_signal2 .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-subplot(5, 2, 4);
-plot(freqs, abs(f_am2), 'b');
-title('AM Modulated (Mod2) - Frequency Domain');
-xlabel('Frequency (Hz)'); ylabel('Magnitude');
-
-% Demod (Time Domain)
-subplot(5, 2, 5);
-plot(t192, demod_signal2, 'b');
-title('Demodulated (Demod2) - Time Domain');
-xlabel('Time (s)'); ylabel('Magnitude');
-
-% Demod (Frequency Domain)
-f_demod2 = zeros(K, 1);
-for k = 1:K
-    f_demod2(k) = sum(demod_signal2 .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-subplot(5, 2, 6);
-plot(freqs, abs(f_demod2), 'b');
-title('Demodulated (Demod2) - Frequency Domain');
-xlabel('Frequency (Hz)'); ylabel('Magnitude');
-
-% Delay (Time Domain)
-subplot(5, 2, 7);
-plot(t192, yDelay2, 'b');
-title('Demod + Delay (Delay2) - Time Domain');
-xlabel('Time (s)'); ylabel('Magnitude');
-
-% Delay (Frequency Domain)
-f_delay2 = zeros(K, 1);
-for k = 1:K
-    f_delay2(k) = sum(yDelay2 .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-subplot(5, 2, 8);
-plot(freqs, abs(f_delay2), 'b');
-title('Demod + Delay (Delay2) - Frequency Domain');
-xlabel('Frequency (Hz)'); ylabel('Magnitude');
-
-% Clean (Time Domain)
-subplot(5, 2, 9);
-plot(t192, yClean2, 'b');
-title('Final: Delay Removed (DeDelay2) - Time Domain');
-xlabel('Time (s)'); ylabel('Magnitude');
-
-% Clean (Frequency Domain)
-f_clean2 = zeros(K, 1);
-for k = 1:K
-    f_clean2(k) = sum(yClean2 .* exp(-1j * 2 * pi * (k - 1) / N * n'));
-end
-subplot(5, 2, 10);
-plot(freqs, abs(f_clean2), 'b');
-title('Final: Delay Removed (DeDelay2) - Frequency Domain');
-xlabel('Frequency (Hz)'); ylabel('Magnitude');
-
-% Audio players
-soundOriginal2  = audioplayer(x, Fs192, 24);
-soundModulated2 = audioplayer(am_signal2, Fs192, 24);
-soundDemod2     = audioplayer(demod_signal2, Fs192, 24);
-soundDelay2     = audioplayer(yDelay2, Fs192, 24);
-soundClean2     = audioplayer(yClean2, Fs192, 24);
-
-%% To Hear Sounds, type "play(sound...)"
-% Original Audio File
-disp('Original:          play(soundOriginal)');
-% Mod and Demod Audio
-disp('AM Modulated:      play(soundModulated)');
-disp('AM Demodulation:   play(soundDemodulated)');
-% Delay and Clean Audio
-disp('With Delay:        play(soundDelay)');
-disp('Delay Removed:     play(soundClean)');
-% Mod -> Demod -> Delay -> DeDelay Audio in order
-disp('Original:        play(soundOriginal2)');
-disp('AM Modulated:    play(soundModulated2)');
-disp('Demodulated:     play(soundDemod2)');
-disp('With Delay:      play(soundDelay2)');
-disp('Delay Removed:   play(soundClean2)');
-</code></pre>
-                </details>
-            </div>
-            <div class="project-media">
-                <img src="DigitalAM.jpg" alt="MATLAB simulation plots for the digital AM system" onerror="imgFallback(this)">
-            </div>
-        </div>
-
-        <div class="project-container">
+        <div class="project-container" data-project="key-fob">
             <div class="project-info">
                 <div class="item-header">
                     <span>Automotive RF Key Fob Antenna Analysis</span>
@@ -1615,10 +1160,16 @@ disp('Delay Removed:   play(soundClean2)');
                 <div class="item-sub">
                     <span>Antenna Design Course Project</span>
                 </div>
-                <p class="project-desc">
-                    Investigated the performance limitations of a 315 MHz Toyota smart key fob to explain why its unlock range trailed competing vehicles. Analyzed the internal ~6 cm PCB trace antenna, evaluating how its copper layout and transmitter-IC placement affected RF signal strength and radiation efficiency, then proposed miniaturized meander PCB antenna designs as a remedy.
-                </p>
+                <ul class="project-bullets">
+                    <li>Investigated the performance limitations of a 315 MHz Toyota smart key fob to explain why its unlock range trailed competing vehicles.</li>
+                    <li>Analyzed the internal ~6 cm PCB trace antenna, evaluating how its copper layout and transmitter-IC placement affected RF signal strength and radiation efficiency.</li>
+                    <li>Proposed miniaturized meander PCB antenna designs to address the key fob’s range limitations.</li>
+                </ul>
                 <div class="project-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="key-fob" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for Automotive RF Key Fob Antenna Analysis">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
                     <a href="CarRange.pdf" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
                         <span aria-hidden="true">📑</span> View Analysis Presentation
                     </a>
@@ -1629,7 +1180,7 @@ disp('Delay Removed:   play(soundClean2)');
             </div>
         </div>
 
-        <div class="project-container">
+        <div class="project-container" data-project="eme">
             <div class="project-info">
                 <div class="item-header">
                     <span>Earth-Moon-Earth Antenna</span>
@@ -1638,10 +1189,17 @@ disp('Delay Removed:   play(soundClean2)');
                 <div class="item-sub">
                     <span>Antenna Design Course Project</span>
                 </div>
-                <p class="project-desc">
-                    Derived the performance requirements for an Earth-Moon-Earth (EME) radar system designed to bounce radio signals off the lunar surface. Applied the radar range equation across the 385,000 km propagation path to budget path loss, antenna gain, and system noise temperature — sizing a 20 m dish capable of sustaining a reliable 20 dB signal-to-noise ratio.
-                </p>
+                <ul class="project-bullets">
+                    <li>Modeled and analyzed a radar link budget utilizing the radar range equation to successfully guarantee a minimum Signal-to-Noise Ratio of 20 dB</li>
+                    <li>Calculated extreme free-space path loss (<i>P<sub>loss</sub></i> = -270.9 dB) at a 1.3 GHz carrier frequency over a 770,000 km dual-hop propagation path</li>
+                    <li>Derived system noise power (<i>P<sub>n</sub></i> = -144 dBm) using the kTB thermal noise formula across an assumed 1 kHz receiver bandwidth</li>
+                    <li>Determined optimal dimensions by evaluating aperture efficiency (<i>η<sub>a</sub></i> = 0.6) and an antenna gain of 43.45 dBi to specify a 14.1 meter dish diameter</li>
+                </ul>
                 <div class="project-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="eme" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for Earth-Moon-Earth Antenna">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
                     <a href="The Moon.pdf" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
                         <span aria-hidden="true">📄</span> View Design Report
                     </a>
@@ -1703,6 +1261,40 @@ disp('Delay Removed:   play(soundClean2)');
     </div>
 </footer>
 
+<!-- One reusable dialog serves every project's photo collection. -->
+<dialog id="projectGallery" class="gallery-dialog" aria-labelledby="galleryTitle">
+    <div class="gallery-content">
+        <header class="gallery-header">
+            <div>
+                <p class="eyebrow">Project Gallery</p>
+                <h2 id="galleryTitle">Project Photos</h2>
+            </div>
+            <button id="galleryClose" class="gallery-close" type="button" aria-label="Close photo gallery" autofocus>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+        </header>
+        <div class="gallery-layout">
+            <div class="gallery-visual">
+                <div id="galleryStage" class="gallery-stage" aria-busy="false"></div>
+                <div class="gallery-controls">
+                    <button id="galleryPrevious" class="btn btn-secondary" type="button" aria-label="Previous photo">
+                        <span aria-hidden="true">←</span> Previous
+                    </button>
+                    <span id="galleryCounter" class="gallery-counter" role="status" aria-live="polite" aria-atomic="true"></span>
+                    <button id="galleryNext" class="btn btn-secondary" type="button" aria-label="Next photo">
+                        Next <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+                <div id="galleryThumbnails" class="gallery-thumbnails" role="group" aria-label="Choose a project photo"></div>
+            </div>
+            <div class="gallery-caption" aria-live="polite" aria-atomic="true">
+                <h3 id="galleryPhotoTitle"></h3>
+                <p id="galleryDescription"></p>
+            </div>
+        </div>
+    </div>
+</dialog>
+
 <div id="contactModal" class="modal-overlay" onclick="closeContactModalViaOverlay(event)">
     <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <button class="modal-close" type="button" onclick="closeContactModal()" aria-label="Close contact dialog">&times;</button>
@@ -1723,6 +1315,229 @@ disp('Delay Removed:   play(soundClean2)');
 </div>
 
 <script>
+    /* ============================================================
+       EDIT PROJECT PHOTOS HERE
+
+       Each project's photos array can contain as many images as you like.
+       1. Put your image files beside this HTML file, or in an images folder.
+       2. Copy an existing photo object and paste it into the same photos array.
+       3. Separate photo objects with commas. Edit src, alt, title, description.
+       4. Upload the HTML AND those image files to your website.
+
+       Example of a second photo object (replace with your actual filename):
+       {
+           src: 'images/drone-pcb-closeup.jpg',
+           alt: 'Close-up of the drone flight controller PCB',
+           title: 'Flight controller PCB',
+           description: 'Describe the hardware, test, or result shown here.'
+       }
+
+       Filenames are case-sensitive on most website hosts. Use \n inside a
+       description for a line break. Text is displayed safely as plain text.
+       The original photo paths below match the existing website assets.
+       ============================================================ */
+    const PROJECT_GALLERIES = {
+        research: {
+            title: 'Distributed Spectrum Sensing Research',
+            photos: [
+                {
+                    src: 'PosterSDR.jpg',
+                    alt: 'NEWSDR 2026 distributed spectrum sensing poster',
+                    title: 'NEWSDR 2026 research poster',
+                    description: 'Research poster for the distributed spectrum sensing work at the Ubiquitous Communication and Networking (UCaN) Lab.'
+                }
+            ]
+        },
+        drone: {
+            title: 'STM32 Drone Health Monitoring System',
+            photos: [
+                {
+                    src: 'flightcontroller.jpg',
+                    alt: 'STM32-based drone telemetry monitoring hardware',
+                    title: 'Drone health monitoring hardware',
+                    description: 'Hardware for the drone health monitoring system. The project processes ESC telemetry and displays drone health in a local Python interface.'
+                }
+            ]
+        },
+        'am-radio': {
+            title: 'AM Radio Receiver & Transmitter',
+            photos: [
+                {
+                    src: 'AMradio.jpg',
+                    alt: 'Breadboard layout for an analog AM receiver circuit',
+                    title: 'AM receiver breadboard',
+                    description: 'Breadboard implementation of the AM receiver, combining frequency filtering, a diode envelope detector, and an LM386 audio amplifier.'
+                }
+            ]
+        },
+        'key-fob': {
+            title: 'Automotive RF Key Fob Antenna Analysis',
+            photos: [
+                {
+                    src: 'KeyFob.jpg',
+                    alt: 'Toyota key fob PCB antenna analysis',
+                    title: 'Toyota key fob antenna',
+                    description: 'Analysis of the PCB trace antenna in a 315 MHz Toyota smart key fob, examining layout and RF performance limitations.'
+                }
+            ]
+        },
+        eme: {
+            title: 'Earth-Moon-Earth Antenna',
+            photos: [
+                {
+                    src: 'EME_Radar.jpg',
+                    alt: 'Earth-Moon-Earth radar antenna design parameters',
+                    title: 'Earth–Moon–Earth antenna design',
+                    description: 'Design parameters for an Earth–Moon–Earth radar link, including path loss, antenna gain, system noise, and a target signal-to-noise ratio of 20 dB.'
+                }
+            ]
+        }
+    };
+
+    /* ---------- Project gallery: navigation, captions, and focus ---------- */
+    (function () {
+        const dialog = document.getElementById('projectGallery');
+        const title = document.getElementById('galleryTitle');
+        const stage = document.getElementById('galleryStage');
+        const photoTitle = document.getElementById('galleryPhotoTitle');
+        const description = document.getElementById('galleryDescription');
+        const counter = document.getElementById('galleryCounter');
+        const thumbnails = document.getElementById('galleryThumbnails');
+        const previous = document.getElementById('galleryPrevious');
+        const next = document.getElementById('galleryNext');
+        const close = document.getElementById('galleryClose');
+        let photos = [];
+        let currentIndex = 0;
+        let opener = null;
+        let backdropPointerDown = false;
+
+        function showPhoto(index) {
+            if (!photos.length) {
+                const empty = document.createElement('p');
+                empty.textContent = 'Project photos coming soon.';
+                stage.replaceChildren(empty);
+                stage.setAttribute('aria-busy', 'false');
+                counter.textContent = 'No photos yet';
+                photoTitle.textContent = 'Photos coming soon';
+                description.textContent = '';
+                return;
+            }
+
+            currentIndex = (index + photos.length) % photos.length;
+            const photo = photos[currentIndex];
+            photoTitle.textContent = photo.title || 'Project photo';
+            description.textContent = photo.description || '';
+            counter.textContent = (currentIndex + 1) + ' / ' + photos.length;
+            stage.setAttribute('aria-busy', 'true');
+
+            const image = document.createElement('img');
+            image.alt = photo.alt || photo.title || title.textContent;
+            image.decoding = 'async';
+            image.hidden = true;
+            const status = document.createElement('p');
+            status.setAttribute('role', 'status');
+            status.textContent = 'Loading image…';
+            image.addEventListener('load', function () {
+                if (!stage.contains(image)) return;
+                image.hidden = false;
+                status.hidden = true;
+                stage.setAttribute('aria-busy', 'false');
+            });
+            image.addEventListener('error', function () {
+                if (!stage.contains(image)) return;
+                image.hidden = true;
+                status.textContent = 'This image is unavailable.';
+                stage.setAttribute('aria-busy', 'false');
+            });
+            stage.replaceChildren(image, status);
+            image.src = photo.src;
+
+            Array.from(thumbnails.children).forEach(function (button, i) {
+                button.setAttribute('aria-pressed', String(i === currentIndex));
+            });
+            const selected = thumbnails.children[currentIndex];
+            if (selected && !thumbnails.hidden) {
+                // Scroll only the thumbnail strip, keeping the page and dialog still.
+                const left = selected.offsetLeft - thumbnails.offsetLeft;
+                if (left < thumbnails.scrollLeft) thumbnails.scrollLeft = left;
+                else if (left + selected.offsetWidth > thumbnails.scrollLeft + thumbnails.clientWidth) {
+                    thumbnails.scrollLeft = left + selected.offsetWidth - thumbnails.clientWidth;
+                }
+            }
+        }
+
+        function openGallery(button) {
+            const project = PROJECT_GALLERIES[button.dataset.gallery];
+            if (!project || dialog.open) return;
+            opener = button;
+            title.textContent = project.title;
+            photos = (project.photos || []).filter(function (photo) {
+                return photo && typeof photo.src === 'string' && photo.src.trim();
+            });
+            currentIndex = 0;
+            thumbnails.replaceChildren();
+            photos.forEach(function (photo, index) {
+                const thumbnail = document.createElement('button');
+                thumbnail.type = 'button';
+                thumbnail.className = 'gallery-thumb';
+                thumbnail.setAttribute('aria-label', 'View photo ' + (index + 1) + ': ' + (photo.title || 'Project photo'));
+                thumbnail.setAttribute('aria-pressed', 'false');
+                const image = document.createElement('img');
+                image.alt = '';
+                image.loading = 'lazy';
+                image.addEventListener('error', function () { image.hidden = true; });
+                image.src = photo.src;
+                const number = document.createElement('span');
+                number.textContent = index + 1;
+                number.setAttribute('aria-hidden', 'true');
+                thumbnail.append(image, number);
+                thumbnail.addEventListener('click', function () { showPhoto(index); });
+                thumbnails.appendChild(thumbnail);
+            });
+            thumbnails.hidden = photos.length < 2;
+            previous.disabled = next.disabled = photos.length < 2;
+            dialog.showModal();
+            document.documentElement.classList.add('gallery-open');
+            showPhoto(0);
+            close.focus({ preventScroll: true });
+        }
+
+        document.querySelectorAll('[data-gallery]').forEach(function (button) {
+            button.addEventListener('click', function () { openGallery(button); });
+        });
+        previous.addEventListener('click', function () { showPhoto(currentIndex - 1); });
+        next.addEventListener('click', function () { showPhoto(currentIndex + 1); });
+        close.addEventListener('click', function () { dialog.close(); });
+        dialog.addEventListener('close', function () {
+            document.documentElement.classList.remove('gallery-open');
+            stage.replaceChildren();
+            if (opener && opener.isConnected) opener.focus({ preventScroll: true });
+        });
+        dialog.addEventListener('cancel', function (event) {
+            event.preventDefault();
+            dialog.close();
+        });
+        dialog.addEventListener('pointerdown', function (event) {
+            backdropPointerDown = event.target === dialog;
+        });
+        dialog.addEventListener('click', function (event) {
+            if (backdropPointerDown && event.target === dialog) dialog.close();
+            backdropPointerDown = false;
+        });
+        dialog.addEventListener('keydown', function (event) {
+            if (event.altKey || event.ctrlKey || event.metaKey || photos.length < 2) return;
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                event.preventDefault();
+                showPhoto(currentIndex + (event.key === 'ArrowLeft' ? -1 : 1));
+                // Arrow keys move thumbnail focus along with the selected photo.
+                if (thumbnails.contains(document.activeElement)) {
+                    thumbnails.children[currentIndex].focus({ preventScroll: true });
+                }
+            }
+        });
+        // Native modal dialogs keep keyboard focus inside and make the page inert.
+    })();
+
     /* ---------- Theme toggle (persistent) ---------- */
     const themeToggle = document.getElementById('themeToggle');
     function setTheme(t) {
@@ -1757,36 +1572,6 @@ disp('Delay Removed:   play(soundClean2)');
             });
         }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
         sectionsForSpy.forEach(s => spy.observe(s));
-    }
-
-    /* ---------- Copy code ---------- */
-    function copyCode(btn) {
-        const code = btn.closest('.code-details').querySelector('code');
-        const text = code.innerText;
-        const label = btn.querySelector('.copy-label');
-        const done = function () {
-            btn.classList.add('copied');
-            label.textContent = 'Copied!';
-            setTimeout(function () {
-                btn.classList.remove('copied');
-                label.textContent = 'Copy code';
-            }, 2000);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(done).catch(fallbackCopy);
-        } else {
-            fallbackCopy();
-        }
-        function fallbackCopy() {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            try { document.execCommand('copy'); done(); } catch (e) {}
-            document.body.removeChild(ta);
-        }
     }
 
     /* ---------- Image fallback (neutral, never another project's photo) ---------- */
