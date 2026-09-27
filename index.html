@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duy (Simon) Pham | Electrical Engineering &amp; Computer Science</title>
+
+    <meta name="description" content="Duy (Simon) Pham — Electrical Engineering & Computer Science at UMass Boston. RF/analog hardware, embedded firmware, and ML-assisted spectrum sensing.">
+    <meta name="author" content="Duy (Simon) Pham">
+
+    <!-- Open Graph / link preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Duy (Simon) Pham | Electrical Engineering & Computer Science">
+    <meta property="og:description" content="RF/analog hardware, embedded firmware, and ML-assisted spectrum sensing. UMass Boston.">
+    <meta property="og:image" content="profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon: signal-line monogram -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b2447'/%3E%3Cpath d='M5 16 h4 l2 -7 3 14 3 -10 2 6 h8' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+
+    <!-- Prevent theme flash: set theme before first paint -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (!t) {
+                    t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            /* Brand palette — deep blues, slate grays, crisp whites */
+            --navy-900: #060b16;
+            --navy-800: #0b1424;
+            --navy-700: #102a4c;
+            --blue-600: #1d4ed8;
+            --blue-500: #2563eb;
+            --blue-400: #3b82f6;
+            --sky-400:  #38bdf8;
+
+            /* Light theme (default) */
+            --bg:          #eef2f8;
+            --bg-grad-1:   #e8eef7;
+            --bg-grad-2:   #f4f7fc;
+            --surface:     #ffffff;
+            --surface-2:   #f6f9fd;
+            --surface-3:   #eef3fa;
+            --text:        #0b1220;
+            --text-soft:   #2b3648;
+            --text-muted:  #5a6678;
+            --heading:     #0d2748;
+            --primary:     #102a4c;
+            --accent:      #2563eb;
+            --accent-soft: #3b82f6;
+            --border:      #dde5f0;
+            --border-strong: #c9d5e6;
+            --code-bg:     #0b1220;
+            --code-bar:    #131e33;
+            --code-text:   #cdd9ec;
+            --ring:        rgba(37, 99, 235, 0.40);
+
+            --shadow-sm: 0 1px 2px rgba(13, 39, 72, 0.06);
+            --shadow-md: 0 6px 18px -8px rgba(13, 39, 72, 0.18), 0 2px 6px -2px rgba(13, 39, 72, 0.08);
+            --shadow-lg: 0 22px 48px -20px rgba(13, 39, 72, 0.30), 0 8px 18px -10px rgba(13, 39, 72, 0.14);
+            --nav-bg:    rgba(255, 255, 255, 0.72);
+            --nav-bg-scrolled: rgba(255, 255, 255, 0.88);
+
+            /* Type scale (fluid) */
+            --fs-hero:   clamp(2.2rem, 1.4rem + 3.4vw, 3.4rem);
+            --fs-h2:     clamp(1.45rem, 1.15rem + 1.2vw, 1.9rem);
+            --fs-h3:     clamp(1.05rem, 0.96rem + 0.4vw, 1.2rem);
+            --fs-body:   1.0rem;
+            --fs-sm:     0.92rem;
+            --fs-xs:     0.8rem;
+
+            /* Spacing & shape */
+            --radius-sm: 10px;
+            --radius:    16px;
+            --radius-lg: 22px;
+            --section-pad: clamp(1.8rem, 1.2rem + 2.2vw, 3rem);
+            --maxw: 1080px;
+
+            --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+            --t-fast: 0.18s var(--ease);
+            --t:      0.30s var(--ease);
+        }
+
+        [data-theme="dark"] {
+            --bg:          #060b16;
+            --bg-grad-1:   #07101f;
+            --bg-grad-2:   #0a1322;
+            --surface:     #0e1828;
+            --surface-2:   #111e33;
+            --surface-3:   #16243c;
+            --text:        #e7eefb;
+            --text-soft:   #c2cfe4;
+            --text-muted:  #8a9bb6;
+            --heading:     #dbe7fb;
+            --primary:     #cfe0fb;
+            --accent:      #5b9bff;
+            --accent-soft: #7cb1ff;
+            --border:      #1d2c45;
+            --border-strong: #283a58;
+            --code-bg:     #060d18;
+            --code-bar:    #0d1828;
+            --code-text:   #cdd9ec;
+            --ring:        rgba(91, 155, 255, 0.45);
+
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 8px 22px -10px rgba(0, 0, 0, 0.6);
+            --shadow-lg: 0 26px 56px -24px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(91, 155, 255, 0.04);
+            --nav-bg:    rgba(8, 15, 28, 0.62);
+            --nav-bg-scrolled: rgba(8, 15, 28, 0.85);
+        }
+
+        /* ============================================================
+           BASE
+           ============================================================ */
+        * { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 88px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: var(--fs-body);
+            line-height: 1.65;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background:
+                radial-gradient(1200px 700px at 85% -10%, var(--bg-grad-1), transparent 60%),
+                radial-gradient(1000px 600px at -10% 5%, var(--bg-grad-2), transparent 55%),
+                var(--bg);
+            background-attachment: fixed;
+            transition: background-color var(--t), color var(--t);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 { font-family: "Sora", "Inter", sans-serif; letter-spacing: -0.015em; }
+
+        a { color: var(--accent); }
+
+        ::selection { background: rgba(37, 99, 235, 0.22); }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* Eyebrow label — code-comment vernacular, true to the embedded/RF subject */
+        .eyebrow {
+            font-family: "JetBrains Mono", monospace;
+            font-size: var(--fs-xs);
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .eyebrow::before {
+            content: "//";
+            color: var(--accent-soft);
+            opacity: 0.7;
+        }
+
+        /* ============================================================
+           NAVIGATION
+           ============================================================ */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: saturate(160%) blur(14px);
+            -webkit-backdrop-filter: saturate(160%) blur(14px);
+            border-bottom: 1px solid transparent;
+            transition: background-color var(--t), border-color var(--t), box-shadow var(--t);
+        }
+        nav.scrolled {
+            background: var(--nav-bg-scrolled);
+            border-bottom-color: var(--border);
+            box-shadow: 0 8px 30px -18px rgba(13, 39, 72, 0.45);
+        }
+        .nav-container {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 22px;
+        }
+        .nav-logo {
+            font-family: "Sora", sans-serif;
+            font-weight: 700;
+            color: var(--heading);
+            font-size: 1.15rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            letter-spacing: -0.01em;
+        }
+        .nav-logo .logo-mark {
+            width: 26px; height: 26px;
+            border-radius: 7px;
+            background: linear-gradient(140deg, var(--blue-600), var(--sky-400));
+            display: grid; place-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+        .nav-logo .logo-mark svg { width: 17px; height: 17px; }
+
+        .nav-right { display: flex; align-items: center; gap: 6px; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a {
+            position: relative;
+            color: var(--text-soft);
+            text-decoration: none;
+            margin: 0 2px;
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            transition: color var(--t-fast), background-color var(--t-fast);
+        }
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 12px; right: 12px; bottom: 4px;
+            height: 2px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--sky-400));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--t);
+        }
+        .nav-links a:hover { color: var(--heading); }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { transform: scaleX(1); }
+        .nav-links a.active { color: var(--heading); }
+
+        /* Theme toggle */
+        .theme-toggle {
+            width: 42px; height: 42px;
+            border-radius: 11px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-soft);
+            display: grid; place-items: center;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .theme-toggle:hover {
+            color: var(--heading);
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
+        }
+        .theme-toggle svg { width: 19px; height: 19px; transition: opacity var(--t-fast), transform var(--t); }
+        .theme-toggle .icon-sun  { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun  { display: block; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+        /* ============================================================
+           LAYOUT CONTAINERS
+           ============================================================ */
+        .main-container {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: clamp(28px, 3vw, 52px) 22px 64px;
+        }
+
+        section {
+            background: var(--surface);
+            padding: var(--section-pad);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 26px;
+            box-shadow: var(--shadow-sm);
+            transition: background-color var(--t), border-color var(--t), box-shadow var(--t);
+        }
+
+        section > h2 {
+            color: var(--heading);
+            font-size: var(--fs-h2);
+            font-weight: 700;
+            margin: 0 0 26px;
+            padding-bottom: 16px;
+            position: relative;
+        }
+        section > h2::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 56px; height: 3px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--sky-400));
+        }
+
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero-section {
+            display: flex;
+            gap: clamp(24px, 4vw, 52px);
+            align-items: center;
+            background:
+                linear-gradient(135deg, rgba(37,99,235,0.05), transparent 45%),
+                var(--surface);
+            padding: clamp(26px, 3vw, 48px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 26px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 28px 28px;
+            -webkit-mask-image: radial-gradient(420px 320px at 88% 8%, #000, transparent 72%);
+                    mask-image: radial-gradient(420px 320px at 88% 8%, #000, transparent 72%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .hero-text { flex: 2; position: relative; z-index: 1; }
+        .hero-text h1 {
+            font-size: var(--fs-hero);
+            font-weight: 800;
+            color: var(--heading);
+            margin: 0 0 6px;
+            line-height: 1.05;
+        }
+        .hero-accent-line {
+            width: 64px; height: 4px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--sky-400));
+            margin: 12px 0 18px;
+        }
+        .hero-subtitle {
+            font-size: clamp(1.02rem, 0.95rem + 0.5vw, 1.2rem);
+            color: var(--text-soft);
+            margin: 0 0 16px;
+            font-weight: 600;
+        }
+        .hero-desc {
+            color: var(--text-soft);
+            font-size: 1.04rem;
+            margin-bottom: 20px;
+            max-width: 56ch;
+        }
+        .hero-meta {
+            font-size: var(--fs-sm);
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+        }
+        .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        .profile-frame {
+            position: relative;
+            width: clamp(180px, 22vw, 232px);
+            aspect-ratio: 1;
+        }
+        .profile-frame::after {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 140deg, var(--blue-500), var(--sky-400), var(--blue-600), var(--blue-500));
+            z-index: 0;
+            opacity: 0.85;
+            filter: blur(0.5px);
+        }
+        .profile-img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--surface);
+            background: var(--surface-3);
+            box-shadow: var(--shadow-md);
+            display: block;
+        }
+        .profile-fallback {
+            position: relative;
+            z-index: 1;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 5px solid var(--surface);
+            background: var(--surface-3);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-muted);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.8rem;
+            padding: 22px;
+        }
+
+        /* ============================================================
+           BUTTONS
+           ============================================================ */
+        .btn-container { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 18px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--fs-sm);
+            font-family: "Inter", sans-serif;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+            line-height: 1.2;
+        }
+        .btn:active { transform: translateY(0); }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+            color: #fff;
+            box-shadow: 0 10px 22px -12px rgba(37, 99, 235, 0.75);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 30px -14px rgba(37, 99, 235, 0.85);
+        }
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--heading);
+            border-color: var(--border-strong);
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-sm { padding: 8px 13px; font-size: var(--fs-xs); }
+
+        /* ============================================================
+           ITEMS (experience / research)
+           ============================================================ */
+        .item { margin-bottom: 30px; }
+        .item:last-child { margin-bottom: 0; }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-family: "Sora", sans-serif;
+            font-weight: 700;
+            font-size: var(--fs-h3);
+            color: var(--heading);
+        }
+        .item-header .meta-date {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 500;
+            font-size: var(--fs-xs);
+            color: var(--text-muted);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            padding: 3px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+            align-self: center;
+        }
+        .item-sub {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: var(--fs-sm);
+            margin: 6px 0 14px;
+        }
+        .item-sub .sub-right { color: var(--text-muted); font-weight: 500; }
+
+        ul { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 8px; color: var(--text-soft); }
+        li::marker { color: var(--accent-soft); }
+
+        /* Education specifics */
+        .edu-honors { margin-bottom: 16px; }
+        .edu-honors strong, .coursework-label { color: var(--heading); }
+        .coursework { line-height: 1.85; }
+        .coursework-list { list-style: none; padding-left: 0; margin-top: 6px; }
+        .coursework-list li { margin-bottom: 7px; }
+        .coursework-list .cat { color: var(--accent); font-weight: 600; }
+
+        /* ============================================================
+           PROJECT / RESEARCH SPLIT LAYOUT
+           ============================================================ */
+        .project-container {
+            display: flex;
+            gap: clamp(20px, 3vw, 34px);
+            margin-bottom: 34px;
+            align-items: flex-start;
+            padding-bottom: 34px;
+            border-bottom: 1px solid var(--border);
+        }
+        .project-container:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .project-info { flex: 2; min-width: 0; }
+        .project-bullets { margin-top: 10px; }
+        .project-bullets li:last-child { margin-bottom: 0; }
+        .project-actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .project-media { flex: 1; min-width: 230px; }
+        .project-media img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            display: block;
+            transition: transform var(--t), box-shadow var(--t);
+        }
+        .project-media img:hover {
+            transform: translateY(-3px) scale(1.012);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Research poster preview card */
+        .poster-card {
+            background: var(--surface-2);
+            padding: 16px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .poster-card .poster-label {
+            font-family: "JetBrains Mono", monospace;
+            font-size: var(--fs-xs);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin: 0 0 14px;
+            font-weight: 600;
+        }
+        .poster-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--t);
+            display: block;
+        }
+        .poster-card a:hover img { transform: scale(1.02); }
+
+        .research-actions { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+        /* ============================================================
+           SKILLS
+           ============================================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .skill-card {
+            background: var(--surface-2);
+            padding: 18px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            color: var(--text-soft);
+            font-size: var(--fs-sm);
+            transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .skill-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-md);
+        }
+        .skill-cat {
+            font-family: "Sora", sans-serif;
+            font-weight: 700;
+            color: var(--heading);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.98rem;
+        }
+        .skill-cat::before {
+            content: "";
+            width: 7px; height: 7px;
+            border-radius: 2px;
+            background: linear-gradient(135deg, var(--accent), var(--sky-400));
+        }
+
+        /* ============================================================
+           CONFERENCES
+           ============================================================ */
+        .conf-list { display: flex; gap: 16px; flex-wrap: wrap; }
+        .conf-item {
+            flex: 1;
+            min-width: 250px;
+            background: var(--surface-2);
+            padding: 18px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .conf-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-strong);
+            box-shadow: var(--shadow-md);
+        }
+        .conf-item strong { color: var(--heading); font-family: "Sora", sans-serif; }
+        .conf-item p { margin: 6px 0 0; font-size: var(--fs-sm); color: var(--text-muted); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 28px 22px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: var(--fs-sm);
+        }
+        .site-footer a { color: var(--text-muted); text-decoration: none; transition: color var(--t-fast); }
+        .site-footer a:hover { color: var(--accent); }
+        .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+        /* ============================================================
+           CONTACT MODAL
+           ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 11, 22, 0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--t);
+            padding: 20px;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            transform: translateY(12px) scale(0.97);
+            transition: transform var(--t);
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+        .modal-close {
+            position: absolute;
+            top: 14px; right: 16px;
+            width: 34px; height: 34px;
+            border-radius: 9px;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            border: 1px solid transparent;
+            background: none;
+            color: var(--text-muted);
+            transition: color var(--t-fast), background-color var(--t-fast), border-color var(--t-fast);
+        }
+        .modal-close:hover { color: var(--heading); background: var(--surface-2); border-color: var(--border); }
+        .modal-title {
+            color: var(--heading);
+            font-family: "Sora", sans-serif;
+            margin: 0 0 20px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        .modal-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 1.02rem;
+            color: var(--text-soft);
+        }
+        .modal-row:last-child { margin-bottom: 0; }
+        .modal-row .modal-ico {
+            width: 38px; height: 38px;
+            flex: none;
+            border-radius: 10px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            display: grid; place-items: center;
+            color: var(--accent);
+        }
+        .modal-row a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        .modal-row a:hover { text-decoration: underline; }
+        .modal-row .static { color: var(--text-soft); font-weight: 600; }
+
+        /* ============================================================
+           PROJECT PHOTO GALLERY
+           ============================================================ */
+        .gallery-trigger { min-height: 44px; font-size: 0.875rem; }
+        .gallery-trigger svg { flex: none; }
+        html.gallery-open, html.gallery-open body { overflow: hidden; }
+        .gallery-dialog {
+            width: min(1040px, calc(100% - 32px));
+            max-width: none;
+            max-height: calc(100vh - 32px);
+            max-height: calc(100dvh - 32px);
+            margin: auto;
+            padding: 0;
+            color: var(--text);
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+        .gallery-dialog::backdrop {
+            background: rgba(6, 11, 22, 0.78);
+            backdrop-filter: blur(6px);
+        }
+        .gallery-content { padding: clamp(18px, 3vw, 30px); }
+        .gallery-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+            padding-bottom: 22px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .gallery-header .eyebrow { margin: 0 0 8px; font-size: 0.875rem; }
+        .gallery-header h2 {
+            margin: 0;
+            color: var(--heading);
+            font-size: clamp(1.15rem, 1rem + 0.8vw, 1.6rem);
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+        }
+        .gallery-close {
+            display: grid;
+            place-items: center;
+            flex: none;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            background: var(--surface-2);
+            color: var(--text-soft);
+            cursor: pointer;
+        }
+        .gallery-close:hover { color: var(--accent); border-color: var(--accent); }
+        .gallery-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.8fr) minmax(200px, 1fr);
+            gap: 26px;
+            align-items: start;
+        }
+        .gallery-visual { min-width: 0; margin: 0; }
+        .gallery-stage {
+            display: grid;
+            place-items: center;
+            height: clamp(220px, 48vh, 500px);
+            height: clamp(220px, 48dvh, 500px);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface-2);
+        }
+        .gallery-stage img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+        .gallery-stage img[hidden], .gallery-stage p[hidden] { display: none; }
+        .gallery-stage p { margin: 0; padding: 28px; text-align: center; color: var(--text-muted); }
+        .gallery-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 14px;
+        }
+        .gallery-controls .btn { min-height: 44px; padding: 10px 12px; font-size: 0.875rem; }
+        .gallery-controls .btn:disabled { opacity: 0.45; cursor: default; transform: none; box-shadow: none; }
+        .gallery-counter { color: var(--text-muted); font-size: 0.875rem; text-align: center; font-variant-numeric: tabular-nums; }
+        .gallery-thumbnails { display: flex; gap: 10px; overflow-x: auto; padding: 6px; margin: 14px -6px 0; }
+        .gallery-thumbnails[hidden] { display: none; }
+        .gallery-thumb {
+            position: relative;
+            flex: 0 0 80px;
+            height: 66px;
+            padding: 3px;
+            border: 2px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            background: var(--surface-3);
+            color: var(--heading);
+            font: inherit;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .gallery-thumb:hover, .gallery-thumb[aria-pressed="true"] { border-color: var(--accent); }
+        .gallery-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 5px; }
+        .gallery-thumb img[hidden] { display: none; }
+        .gallery-thumb span {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            min-width: 24px;
+            padding: 0 5px;
+            border-radius: 4px;
+            color: var(--text);
+            background: var(--surface);
+            font-size: 0.875rem;
+            font-variant-numeric: tabular-nums;
+        }
+        .gallery-caption { overflow-wrap: anywhere; }
+        .gallery-caption h3 { color: var(--heading); font-size: 1.1rem; margin: 0 0 12px; line-height: 1.5; }
+        .gallery-caption p { margin: 0; color: var(--text-soft); font-size: 1rem; line-height: 1.75; white-space: pre-line; }
+        @media (max-width: 720px) {
+            .gallery-layout { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+            .gallery-dialog { width: calc(100% - 20px); max-height: calc(100dvh - 20px); }
+            .gallery-header { margin-bottom: 18px; padding-bottom: 18px; }
+            .gallery-stage { height: clamp(220px, 38dvh, 380px); }
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 860px) {
+            .nav-links a { padding: 7px 9px; }
+        }
+
+        @media (max-width: 720px) {
+            html { scroll-padding-top: 76px; }
+            .nav-container { flex-wrap: wrap; gap: 8px 12px; padding: 12px 18px; }
+            .nav-links { order: 3; width: 100%; justify-content: center; overflow-x: auto; }
+            .nav-links a { padding: 6px 10px; }
+
+            .hero-section { flex-direction: column-reverse; text-align: center; }
+            .hero-accent-line, .hero-meta { margin-left: auto; margin-right: auto; }
+            .hero-meta { justify-content: center; }
+            .btn-container { justify-content: center; }
+            .hero-desc { margin-left: auto; margin-right: auto; }
+
+            .item-header, .item-sub { flex-direction: column; gap: 4px; }
+            .item-header .meta-date { align-self: flex-start; }
+
+            .project-container { flex-direction: column; }
+            .project-media { width: 100%; }
+
+            .skills-grid { grid-template-columns: 1fr; }
+            .site-footer { justify-content: center; text-align: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                transition-duration: 0.001ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="siteNav">
+    <div class="nav-container">
+        <a href="#top" class="nav-logo" aria-label="Duy Pham — home">
+            <span class="logo-mark" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none"><path d="M5 16h4l2-7 3 14 3-10 2 6h8" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            </span>
+            Duy Pham
+        </a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#experience">Experience</a>
+                <a href="#research">Research</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div class="main-container" id="top">
+
+    <header class="hero-section">
+        <div class="hero-text">
+            <p class="eyebrow">Electrical Engineering · UMass Boston</p>
+            <h1>Duy (Simon) Pham</h1>
+            <div class="hero-accent-line"></div>
+            <p class="hero-subtitle">Electrical Engineering &amp; Computer Science</p>
+            <p class="hero-desc">
+                I'm a senior at UMass Boston working where RF and analog hardware meets embedded firmware, designing analog receivers, real-time telemetry systems, and ML-assisted spectrum sensing. My focus is building secure, reliable hardware systems, from the circuit board up to the firmware running on it.
+            </p>
+            <div class="hero-meta">
+                <span>📍 Boston, MA</span>
+                <span>🇺🇸 U.S. Citizen — eligible for DoD security clearance</span>
+            </div>
+            <div class="btn-container">
+                <a href="resume.pdf" class="btn btn-primary" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                    Download Resume
+                </a>
+                <button class="btn btn-secondary" type="button" onclick="openContactModal(event)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 6l8 6 8-6"/></svg>
+                    Contact Me
+                </button>
+                <a href="https://linkedin.com/in/simonphamee" class="btn btn-secondary" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 22 10.6 22 14.1V21h-4v-6.1c0-1.46-.03-3.35-2.04-3.35-2.04 0-2.36 1.6-2.36 3.25V21H9z"/></svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <div class="profile-frame">
+                <img src="profile.jpg" alt="Duy (Simon) Pham headshot" class="profile-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="profile-fallback">Add headshot — profile.jpg</div>
+            </div>
+        </div>
+    </header>
+
+    <section id="education">
+        <p class="eyebrow">Education</p>
+        <h2>Education</h2>
+        <div class="item">
+            <div class="item-header">
+                <span>University of Massachusetts Boston</span>
+                <span class="meta-date">Graduation: Dec 2027</span>
+            </div>
+            <div class="item-sub">
+                <span>B.S. Electrical Engineering · Minor in Computer Science</span>
+                <span class="sub-right">GPA: 3.60 / 4.00</span>
+            </div>
+
+            <p class="edu-honors"><strong>Academic Honors:</strong> Dean's List (2023–2026) · College of Science &amp; Mathematics</p>
+
+            <div class="coursework">
+                <strong class="coursework-label">Relevant Coursework</strong>
+                <ul class="coursework-list">
+                    <li><span class="cat">Electrical Engineering —</span> Signals &amp; Systems, Fields &amp; Waves, Electronics I &amp; II, Antenna Design, Digital Systems, Circuits I &amp; II, Probability &amp; Random Processes</li>
+                    <li><span class="cat">Computer Science &amp; Math —</span> Linear Algebra, Applied ODEs, Computer Programming for Engineers</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <p class="eyebrow">Work Experience</p>
+        <h2>Work Experience</h2>
+
+        <div class="item">
+            <div class="item-header">
+                <span>Electrical Engineering Intern</span>
+                <span class="meta-date">May 2026 – Aug 2026</span>
+            </div>
+            <div class="item-sub">
+                <span>RMF Engineering Inc.</span>
+                <span class="sub-right">Boston, MA</span>
+            </div>
+            <ul>
+                <li>Assisted in the design of building electrical power systems, including distribution panels, lighting circuits, and branch circuits for project documentation</li>
+                <li>Produced AutoCAD/Revit electrical drawings, including panel schedules and power distribution diagrams for construction drawing packages</li>
+                <li>Performed electrical load calculations and voltage drop analysis for commercial building electrical systems during early design phases</li>
+                <li>Collaborated with multidisciplinary engineering teams to coordinate electrical infrastructure with HVAC and architectural layouts</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="item-header">
+                <span>Undergraduate Teaching Assistant</span>
+                <span class="meta-date">Jun 2026 – Aug 2026</span>
+            </div>
+            <div class="item-sub">
+                <span>UMass Boston — Signals &amp; Systems and Probability &amp; Random Processes</span>
+                <span class="sub-right">Boston, MA</span>
+            </div>
+            <ul>
+                <li>Supported students through office hours, homework review, exam preparation, and reinforcement across engineering coursework</li>
+                <li>Assisted students with Fourier transforms, convolution, sampling theorem, and probability distributions through technical problem-solving support</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="research">
+        <p class="eyebrow">Research</p>
+        <h2>Research Experience</h2>
+
+        <div class="project-container" data-project="research">
+            <div class="project-info">
+                <div class="item-header">
+                    <span>Undergraduate Research Assistant</span>
+                    <span class="meta-date">Jan 2026 – Jun 2026</span>
+                </div>
+                <div class="item-sub">
+                    <span>Ubiquitous Communication and Networking (UCaN) Lab</span>
+                </div>
+                <ul class="project-bullets">
+                    <li>Deployed and Implemented a multi-node wireless network via Raspberry Pis, collecting RSSI and throughput measurements for ML Algorithm Training</li>
+                    <li>Automated data collection and controlled experimental parameters XMLRPC, ZMQ Python scripts, implementing on Raspberry Pi node networks</li>
+                    <li>Modified Distributed Spectrum Sensing Algorithm submodels, increasing consensus accuracy to ∼95% and improving decision speed by ∼20%</li>
+                    <li>Integrated Linux-based Testbed Controller (Ubuntu) to support Software Defined Radio spectrum sensing experiments and Raspberry Pi control</li>
+                    <li>Developed MATLAB probability density function models to characterize detection thresholds, reducing false detection rates in the DSS algorithm</li>
+                    <li>Wrote and Deployed Bash scripts for testbed controller to Raspberry Pi, to transfer Python scripts, CSV files, and to save collected experimential data</li>
+                </ul>
+
+                <div class="research-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="research" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for Distributed Spectrum Sensing Research">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
+                    <a href="NewSDR2026.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                        <span aria-hidden="true">📊</span> NEWSDR Poster
+                    </a>
+                    <a href="Research_Presentation.pdf" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                        <span aria-hidden="true">📑</span> Workshop Presentation
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-media">
+                <div class="poster-card">
+                    <p class="poster-label">Poster Preview</p>
+                    <a href="NewSDR2026.pdf" target="_blank" rel="noopener">
+                        <img src="PosterSDR.jpg" alt="NEWSDR 2026 distributed spectrum sensing poster" onerror="imgFallback(this)">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <p class="eyebrow">Engineering Projects</p>
+        <h2>Engineering Projects</h2>
+
+        <div class="project-container" data-project="drone">
+            <div class="project-info">
+                <div class="item-header">
+                    <span>STM32 Drone Health Monitoring System</span>
+                    <span class="meta-date">Jan 2026 – Sep 2026</span>
+                </div>
+                <div class="item-sub">
+                    <span>Firmware &amp; Embedded Systems Engineer · UMass Boston Robotics Club</span>
+                </div>
+                <ul class="project-bullets">
+                    <li>Built and deployed in C a functional project prototype using Arduino, successfully integrating sample ML algorithm into PCB flight controller</li>
+                    <li>Ran 30+ motor health tests for Machine Learning Algorithm Training, using real time collected voltage, current, temperature, and RPM measurements</li>
+                    <li>Reduced false drone health alerts by 25%, maintaining 97% Drone Health Accuracy through algorithm training and tuning, validated with 300+ tests</li>
+                    <li>Deployed C code for STM32 microcontroller, to process ESC telemetry and monitor drone health in a local Python based UI with 10 ms updates</li>
+                </ul>
+                <div class="project-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="drone" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for STM32 Drone Health Monitoring System">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
+                </div>
+            </div>
+            <div class="project-media">
+                <img src="flightcontroller.jpg" alt="STM32-based drone telemetry monitoring hardware" onerror="imgFallback(this)">
+            </div>
+        </div>
+
+        <div class="project-container" data-project="am-radio">
+            <div class="project-info">
+                <div class="item-header">
+                    <span>AM Radio Receiver &amp; Transmitter</span>
+                    <span class="meta-date">Jun 2025 – Aug 2025</span>
+                </div>
+                <div class="item-sub">
+                    <span>Analog Hardware Project</span>
+                </div>
+                <ul class="project-bullets">
+                    <li>Implemented bandpass filter receiving 680 kHz, 850 kHz, and 1510 kHz radio waves, verifying real time audio from Boston radio stations</li>
+                    <li>Optimized RC filters lowering noise floor by ∼15% and reducing noise by ∼5 dB for clearer recovered speech, validated over 30+ test trials</li>
+                    <li>Designed and deployed a diode based envelope detector to rectify and demodulate AM audio signal from varying radio station carrier waves</li>
+                    <li>Designed, built, and tuned an LM386 audio amplifier stage with variable gain (5x–20x) for user controlled volume adjustment</li>
+                </ul>
+                <div class="project-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="am-radio" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for AM Radio Receiver &amp; Transmitter">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
+                    <a href="https://youtu.be/d3Bmgt7xNro" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                        <span aria-hidden="true">▶</span> Watch Test Video
+                    </a>
+                </div>
+            </div>
+            <div class="project-media">
+                <img src="AMradio.jpg" alt="Breadboard layout for an analog AM receiver circuit" onerror="imgFallback(this)">
+            </div>
+        </div>
+
+        <div class="project-container" data-project="key-fob">
+            <div class="project-info">
+                <div class="item-header">
+                    <span>Automotive RF Key Fob Antenna Analysis</span>
+                    <span class="meta-date">Apr 2026 – May 2026</span>
+                </div>
+                <div class="item-sub">
+                    <span>Antenna Design Course Project</span>
+                </div>
+                <ul class="project-bullets">
+                    <li>Investigated the performance limitations of a 315 MHz Toyota smart key fob to explain why its unlock range trailed competing vehicles.</li>
+                    <li>Analyzed the internal ~6 cm PCB trace antenna, evaluating how its copper layout and transmitter-IC placement affected RF signal strength and radiation efficiency.</li>
+                    <li>Proposed miniaturized meander PCB antenna designs to address the key fob’s range limitations.</li>
+                </ul>
+                <div class="project-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="key-fob" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for Automotive RF Key Fob Antenna Analysis">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
+                    <a href="CarRange.pdf" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                        <span aria-hidden="true">📑</span> View Analysis Presentation
+                    </a>
+                </div>
+            </div>
+            <div class="project-media">
+                <img src="KeyFob.jpg" alt="Toyota key fob PCB antenna analysis" onerror="imgFallback(this)">
+            </div>
+        </div>
+
+        <div class="project-container" data-project="eme">
+            <div class="project-info">
+                <div class="item-header">
+                    <span>Earth-Moon-Earth Antenna</span>
+                    <span class="meta-date">Feb 2026 – Mar 2026</span>
+                </div>
+                <div class="item-sub">
+                    <span>Antenna Design Course Project</span>
+                </div>
+                <ul class="project-bullets">
+                    <li>Modeled and analyzed a radar link budget utilizing the radar range equation to successfully guarantee a minimum Signal-to-Noise Ratio of 20 dB</li>
+                    <li>Calculated extreme free-space path loss (<i>P<sub>loss</sub></i> = -270.9 dB) at a 1.3 GHz carrier frequency over a 770,000 km dual-hop propagation path</li>
+                    <li>Derived system noise power (<i>P<sub>n</sub></i> = -144 dBm) using the kTB thermal noise formula across an assumed 1 kHz receiver bandwidth</li>
+                    <li>Determined optimal dimensions by evaluating aperture efficiency (<i>η<sub>a</sub></i> = 0.6) and an antenna gain of 43.45 dBi to specify a 14.1 meter dish diameter</li>
+                </ul>
+                <div class="project-actions">
+                    <button type="button" class="btn btn-secondary btn-sm gallery-trigger" data-gallery="eme" aria-haspopup="dialog" aria-controls="projectGallery" aria-label="View photos for Earth-Moon-Earth Antenna">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
+                        View Photos
+                    </button>
+                    <a href="The Moon.pdf" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+                        <span aria-hidden="true">📄</span> View Design Report
+                    </a>
+                </div>
+            </div>
+            <div class="project-media">
+                <img src="EME_Radar.jpg" alt="Earth-Moon-Earth radar antenna design parameters" onerror="imgFallback(this)">
+            </div>
+        </div>
+
+    </section>
+
+    <section id="skills">
+        <p class="eyebrow">Technical Skills</p>
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <span class="skill-cat">Programming &amp; Software</span>
+                Python, C, C++, MATLAB, LTspice, Linux, Bash, LaTeX, SolidWorks, Verilog/VHDL, KiCad
+            </div>
+            <div class="skill-card">
+                <span class="skill-cat">Circuit Design</span>
+                Op-amps, filters, microwave circuits, sensors, BJTs, MOSFETs, PCB design
+            </div>
+            <div class="skill-card">
+                <span class="skill-cat">Lab &amp; Measurement</span>
+                Oscilloscope, function generator, multimeter, spectrum analyzer
+            </div>
+            <div class="skill-card">
+                <span class="skill-cat">Embedded Systems</span>
+                Raspberry Pi, STM32, ESP32, Arduino, NVIDIA Jetson
+            </div>
+        </div>
+    </section>
+
+    <section id="conferences">
+        <p class="eyebrow">Conferences &amp; Engagement</p>
+        <h2>Conferences &amp; Engagement</h2>
+        <div class="conf-list">
+            <div class="conf-item">
+                <strong>NEWSDR Boston 2026</strong>
+                <p>New England Workshop on Software Defined Radio</p>
+            </div>
+            <div class="conf-item">
+                <strong>MassRobotics Boston 2026</strong>
+                <p>Form &amp; Function Robotics Challenge Competition</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer class="site-footer">
+    <span>© <span id="year"></span> Duy (Simon) Pham · Boston, MA</span>
+    <div class="footer-links">
+        <a href="#top">Back to top ↑</a>
+        <a href="https://linkedin.com/in/simonphamee" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#" onclick="openContactModal(event)">Contact</a>
+    </div>
+</footer>
+
+<!-- One reusable dialog serves every project's photo collection. -->
+<dialog id="projectGallery" class="gallery-dialog" aria-labelledby="galleryTitle">
+    <div class="gallery-content">
+        <header class="gallery-header">
+            <div>
+                <p class="eyebrow">Project Gallery</p>
+                <h2 id="galleryTitle">Project Photos</h2>
+            </div>
+            <button id="galleryClose" class="gallery-close" type="button" aria-label="Close photo gallery" autofocus>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+        </header>
+        <div class="gallery-layout">
+            <div class="gallery-visual">
+                <div id="galleryStage" class="gallery-stage" aria-busy="false"></div>
+                <div class="gallery-controls">
+                    <button id="galleryPrevious" class="btn btn-secondary" type="button" aria-label="Previous photo">
+                        <span aria-hidden="true">←</span> Previous
+                    </button>
+                    <span id="galleryCounter" class="gallery-counter" role="status" aria-live="polite" aria-atomic="true"></span>
+                    <button id="galleryNext" class="btn btn-secondary" type="button" aria-label="Next photo">
+                        Next <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+                <div id="galleryThumbnails" class="gallery-thumbnails" role="group" aria-label="Choose a project photo"></div>
+            </div>
+            <div class="gallery-caption" aria-live="polite" aria-atomic="true">
+                <h3 id="galleryPhotoTitle"></h3>
+                <p id="galleryDescription"></p>
+            </div>
+        </div>
+    </div>
+</dialog>
+
+<div id="contactModal" class="modal-overlay" onclick="closeContactModalViaOverlay(event)">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" type="button" onclick="closeContactModal()" aria-label="Close contact dialog">&times;</button>
+        <div class="modal-title" id="modalTitle">Contact Information</div>
+        <div class="modal-row">
+            <span class="modal-ico" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            </span>
+            <div><strong>Email</strong><br><a href="mailto:simonpham02@gmail.com">simonpham02@gmail.com</a></div>
+        </div>
+        <div class="modal-row">
+            <span class="modal-ico" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.4-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+            </span>
+            <div><strong>Phone</strong><br><span class="static">781-600-5563</span></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ============================================================
+       EDIT PROJECT PHOTOS HERE
+
+       Each project's photos array can contain as many images as you like.
+       1. Put your image files beside this HTML file, or in an images folder.
+       2. Copy an existing photo object and paste it into the same photos array.
+       3. Separate photo objects with commas. Edit src, alt, title, description.
+       4. Upload the HTML AND those image files to your website.
+
+       Example of a second photo object (replace with your actual filename):
+       {
+           src: 'images/drone-pcb-closeup.jpg',
+           alt: 'Close-up of the drone flight controller PCB',
+           title: 'Flight controller PCB',
+           description: 'Describe the hardware, test, or result shown here.'
+       }
+
+       Filenames are case-sensitive on most website hosts. Use \n inside a
+       description for a line break. Text is displayed safely as plain text.
+       The original photo paths below match the existing website assets.
+       ============================================================ */
+    const PROJECT_GALLERIES = {
+        research: {
+            title: 'Distributed Spectrum Sensing Research',
+            photos: [
+                {
+                    src: 'PosterSDR.jpg',
+                    alt: 'NEWSDR 2026 distributed spectrum sensing poster',
+                    title: 'NEWSDR 2026 research poster',
+                    description: 'Research poster for the distributed spectrum sensing work at the Ubiquitous Communication and Networking (UCaN) Lab.'
+                }
+            ]
+        },
+        drone: {
+            title: 'STM32 Drone Health Monitoring System',
+            photos: [
+                {
+                    src: 'flightcontroller.jpg',
+                    alt: 'STM32-based drone telemetry monitoring hardware',
+                    title: 'Drone health monitoring hardware',
+                    description: 'Hardware for the drone health monitoring system. The project processes ESC telemetry and displays drone health in a local Python interface.'
+                }
+            ]
+        },
+        'am-radio': {
+            title: 'AM Radio Receiver & Transmitter',
+            photos: [
+                {
+                    src: 'AMradio.jpg',
+                    alt: 'Breadboard layout for an analog AM receiver circuit',
+                    title: 'AM receiver breadboard',
+                    description: 'Breadboard implementation of the AM receiver, combining frequency filtering, a diode envelope detector, and an LM386 audio amplifier.'
+                }
+            ]
+        },
+        'key-fob': {
+            title: 'Automotive RF Key Fob Antenna Analysis',
+            photos: [
+                {
+                    src: 'KeyFob.jpg',
+                    alt: 'Toyota key fob PCB antenna analysis',
+                    title: 'Toyota key fob antenna',
+                    description: 'Analysis of the PCB trace antenna in a 315 MHz Toyota smart key fob, examining layout and RF performance limitations.'
+                }
+            ]
+        },
+        eme: {
+            title: 'Earth-Moon-Earth Antenna',
+            photos: [
+                {
+                    src: 'EME_Radar.jpg',
+                    alt: 'Earth-Moon-Earth radar antenna design parameters',
+                    title: 'Earth–Moon–Earth antenna design',
+                    description: 'Design parameters for an Earth–Moon–Earth radar link, including path loss, antenna gain, system noise, and a target signal-to-noise ratio of 20 dB.'
+                }
+            ]
+        }
+    };
+
+    /* ---------- Project gallery: navigation, captions, and focus ---------- */
+    (function () {
+        const dialog = document.getElementById('projectGallery');
+        const title = document.getElementById('galleryTitle');
+        const stage = document.getElementById('galleryStage');
+        const photoTitle = document.getElementById('galleryPhotoTitle');
+        const description = document.getElementById('galleryDescription');
+        const counter = document.getElementById('galleryCounter');
+        const thumbnails = document.getElementById('galleryThumbnails');
+        const previous = document.getElementById('galleryPrevious');
+        const next = document.getElementById('galleryNext');
+        const close = document.getElementById('galleryClose');
+        let photos = [];
+        let currentIndex = 0;
+        let opener = null;
+        let backdropPointerDown = false;
+
+        function showPhoto(index) {
+            if (!photos.length) {
+                const empty = document.createElement('p');
+                empty.textContent = 'Project photos coming soon.';
+                stage.replaceChildren(empty);
+                stage.setAttribute('aria-busy', 'false');
+                counter.textContent = 'No photos yet';
+                photoTitle.textContent = 'Photos coming soon';
+                description.textContent = '';
+                return;
+            }
+
+            currentIndex = (index + photos.length) % photos.length;
+            const photo = photos[currentIndex];
+            photoTitle.textContent = photo.title || 'Project photo';
+            description.textContent = photo.description || '';
+            counter.textContent = (currentIndex + 1) + ' / ' + photos.length;
+            stage.setAttribute('aria-busy', 'true');
+
+            const image = document.createElement('img');
+            image.alt = photo.alt || photo.title || title.textContent;
+            image.decoding = 'async';
+            image.hidden = true;
+            const status = document.createElement('p');
+            status.setAttribute('role', 'status');
+            status.textContent = 'Loading image…';
+            image.addEventListener('load', function () {
+                if (!stage.contains(image)) return;
+                image.hidden = false;
+                status.hidden = true;
+                stage.setAttribute('aria-busy', 'false');
+            });
+            image.addEventListener('error', function () {
+                if (!stage.contains(image)) return;
+                image.hidden = true;
+                status.textContent = 'This image is unavailable.';
+                stage.setAttribute('aria-busy', 'false');
+            });
+            stage.replaceChildren(image, status);
+            image.src = photo.src;
+
+            Array.from(thumbnails.children).forEach(function (button, i) {
+                button.setAttribute('aria-pressed', String(i === currentIndex));
+            });
+            const selected = thumbnails.children[currentIndex];
+            if (selected && !thumbnails.hidden) {
+                // Scroll only the thumbnail strip, keeping the page and dialog still.
+                const left = selected.offsetLeft - thumbnails.offsetLeft;
+                if (left < thumbnails.scrollLeft) thumbnails.scrollLeft = left;
+                else if (left + selected.offsetWidth > thumbnails.scrollLeft + thumbnails.clientWidth) {
+                    thumbnails.scrollLeft = left + selected.offsetWidth - thumbnails.clientWidth;
+                }
+            }
+        }
+
+        function openGallery(button) {
+            const project = PROJECT_GALLERIES[button.dataset.gallery];
+            if (!project || dialog.open) return;
+            opener = button;
+            title.textContent = project.title;
+            photos = (project.photos || []).filter(function (photo) {
+                return photo && typeof photo.src === 'string' && photo.src.trim();
+            });
+            currentIndex = 0;
+            thumbnails.replaceChildren();
+            photos.forEach(function (photo, index) {
+                const thumbnail = document.createElement('button');
+                thumbnail.type = 'button';
+                thumbnail.className = 'gallery-thumb';
+                thumbnail.setAttribute('aria-label', 'View photo ' + (index + 1) + ': ' + (photo.title || 'Project photo'));
+                thumbnail.setAttribute('aria-pressed', 'false');
+                const image = document.createElement('img');
+                image.alt = '';
+                image.loading = 'lazy';
+                image.addEventListener('error', function () { image.hidden = true; });
+                image.src = photo.src;
+                const number = document.createElement('span');
+                number.textContent = index + 1;
+                number.setAttribute('aria-hidden', 'true');
+                thumbnail.append(image, number);
+                thumbnail.addEventListener('click', function () { showPhoto(index); });
+                thumbnails.appendChild(thumbnail);
+            });
+            thumbnails.hidden = photos.length < 2;
+            previous.disabled = next.disabled = photos.length < 2;
+            dialog.showModal();
+            document.documentElement.classList.add('gallery-open');
+            showPhoto(0);
+            close.focus({ preventScroll: true });
+        }
+
+        document.querySelectorAll('[data-gallery]').forEach(function (button) {
+            button.addEventListener('click', function () { openGallery(button); });
+        });
+        previous.addEventListener('click', function () { showPhoto(currentIndex - 1); });
+        next.addEventListener('click', function () { showPhoto(currentIndex + 1); });
+        close.addEventListener('click', function () { dialog.close(); });
+        dialog.addEventListener('close', function () {
+            document.documentElement.classList.remove('gallery-open');
+            stage.replaceChildren();
+            if (opener && opener.isConnected) opener.focus({ preventScroll: true });
+        });
+        dialog.addEventListener('cancel', function (event) {
+            event.preventDefault();
+            dialog.close();
+        });
+        dialog.addEventListener('pointerdown', function (event) {
+            backdropPointerDown = event.target === dialog;
+        });
+        dialog.addEventListener('click', function (event) {
+            if (backdropPointerDown && event.target === dialog) dialog.close();
+            backdropPointerDown = false;
+        });
+        dialog.addEventListener('keydown', function (event) {
+            if (event.altKey || event.ctrlKey || event.metaKey || photos.length < 2) return;
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                event.preventDefault();
+                showPhoto(currentIndex + (event.key === 'ArrowLeft' ? -1 : 1));
+                // Arrow keys move thumbnail focus along with the selected photo.
+                if (thumbnails.contains(document.activeElement)) {
+                    thumbnails.children[currentIndex].focus({ preventScroll: true });
+                }
+            }
+        });
+        // Native modal dialogs keep keyboard focus inside and make the page inert.
+    })();
+
+    /* ---------- Theme toggle (persistent) ---------- */
+    const themeToggle = document.getElementById('themeToggle');
+    function setTheme(t) {
+        document.documentElement.setAttribute('data-theme', t);
+        try { localStorage.setItem('theme', t); } catch (e) {}
+        themeToggle.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    themeToggle.addEventListener('click', function () {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    setTheme(document.documentElement.getAttribute('data-theme') || 'light');
+
+    /* ---------- Nav: shadow on scroll + scroll-spy ---------- */
+    const nav = document.getElementById('siteNav');
+    window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 8);
+    }, { passive: true });
+
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+    const sectionsForSpy = navLinks
+        .map(a => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
+
+    if ('IntersectionObserver' in window) {
+        const spy = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+                }
+            });
+        }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+        sectionsForSpy.forEach(s => spy.observe(s));
+    }
+
+    /* ---------- Image fallback (neutral, never another project's photo) ---------- */
+    function imgFallback(img) {
+        img.onerror = null;
+        const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'>" +
+            "<rect width='100%' height='100%' fill='%23e8edf4'/>" +
+            "<rect x='1' y='1' width='398' height='298' fill='none' stroke='%23c9d5e6' stroke-width='2'/>" +
+            "<text x='50%' y='47%' font-family='monospace' font-size='15' fill='%236a7790' text-anchor='middle'>Image unavailable</text>" +
+            "<text x='50%' y='57%' font-family='monospace' font-size='12' fill='%2394a3b8' text-anchor='middle'>add project image</text>" +
+            "</svg>";
+        img.src = "data:image/svg+xml," + svg.replace(/#/g, '%23').replace(/</g, '%3C').replace(/>/g, '%3E');
+    }
+
+    /* ---------- Contact modal (focus + Esc) ---------- */
+    const modal = document.getElementById('contactModal');
+    let lastFocused = null;
+    function openContactModal(event) {
+        if (event) event.preventDefault();
+        lastFocused = document.activeElement;
+        modal.classList.add('active');
+        modal.querySelector('.modal-close').focus();
+    }
+    function closeContactModal() {
+        modal.classList.remove('active');
+        if (lastFocused) lastFocused.focus();
+    }
+    function closeContactModalViaOverlay(event) {
+        if (event.target.id === 'contactModal') closeContactModal();
+    }
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeContactModal();
+    });
+
+    /* ---------- Footer year ---------- */
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
