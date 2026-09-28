@@ -625,8 +625,8 @@
            ============================================================ */
         .conf-list { display: flex; gap: 16px; flex-wrap: wrap; }
         .conf-item {
-            flex: 1;
-            min-width: 250px;
+            flex: 1 1 280px;
+            min-width: 0;
             background: var(--surface-2);
             padding: 18px;
             border-radius: var(--radius);
@@ -638,6 +638,32 @@
             border-color: var(--border-strong);
             box-shadow: var(--shadow-md);
         }
+        .conf-photo {
+            display: grid;
+            place-items: center;
+            aspect-ratio: 4 / 3;
+            margin: 0 0 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+        }
+        .conf-photo img {
+            grid-area: 1 / 1;
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            object-fit: contain;
+        }
+        .conf-photo-placeholder {
+            grid-area: 1 / 1;
+            padding: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: var(--fs-sm);
+        }
+        .conf-photo [hidden] { display: none; }
         .conf-item strong { color: var(--heading); font-family: "Sora", sans-serif; }
         .conf-item p { margin: 6px 0 0; font-size: var(--fs-sm); color: var(--text-muted); }
 
@@ -1077,10 +1103,6 @@
             <div class="project-info">
                 <div class="item-header">
                     <span>STM32 Drone Health Monitoring System</span>
-                    <span class="meta-date">Jan 2026 – Sep 2026</span>
-                </div>
-                <div class="item-sub">
-                    <span>Firmware &amp; Embedded Systems Engineer</span>
                 </div>
                 <ul class="project-bullets">
                     <li>Built and deployed in C a functional project prototype using Arduino, collecting real time drone telemetry</li>
@@ -1108,10 +1130,6 @@
             <div class="project-info">
                 <div class="item-header">
                     <span>AM Radio Receiver &amp; Transmitter</span>
-                    <span class="meta-date">Jun 2025 – Aug 2025</span>
-                </div>
-                <div class="item-sub">
-                    <span>Analog Hardware Project</span>
                 </div>
                 <ul class="project-bullets">
                     <li>Implemented bandpass filter receiving 680 kHz, 850 kHz, and 1510 kHz radio waves, verifying real time audio from Boston radio stations</li>
@@ -1138,10 +1156,6 @@
             <div class="project-info">
                 <div class="item-header">
                     <span>Automotive RF Key Fob Antenna Analysis</span>
-                    <span class="meta-date">Apr 2026 – May 2026</span>
-                </div>
-                <div class="item-sub">
-                    <span>Antenna Design Course Project</span>
                 </div>
                 <ul class="project-bullets">
                     <li>Investigated the performance limitations of a 315 MHz Toyota smart key fob to explain why its unlock range trailed competing vehicles.</li>
@@ -1167,10 +1181,6 @@
             <div class="project-info">
                 <div class="item-header">
                     <span>Earth-Moon-Earth Antenna</span>
-                    <span class="meta-date">Feb 2026 – Mar 2026</span>
-                </div>
-                <div class="item-sub">
-                    <span>Antenna Design Course Project</span>
                 </div>
                 <ul class="project-bullets">
                     <li>Modeled and analyzed a radar link budget utilizing the radar range equation to successfully guarantee a minimum Signal-to-Noise Ratio of 20 dB</li>
@@ -1223,10 +1233,24 @@
         <h2>Conferences &amp; Engagement</h2>
         <div class="conf-list">
             <div class="conf-item">
+                <!-- Add NEWSDR2026.jpg beside this HTML file, or change src to your photo path. -->
+                <div class="conf-photo">
+                    <img src="NEWSDR2026.jpg" alt="NEWSDR Boston 2026 conference photo" loading="lazy" decoding="async"
+                         onerror="this.hidden = true; this.nextElementSibling.hidden = false;"
+                         onload="this.hidden = false; this.nextElementSibling.hidden = true;">
+                    <span class="conf-photo-placeholder" hidden>Photo coming soon</span>
+                </div>
                 <strong>NEWSDR Boston 2026</strong>
                 <p>New England Workshop on Software Defined Radio</p>
             </div>
             <div class="conf-item">
+                <!-- Add MassRobotics2026.jpg beside this HTML file, or change src to your photo path. -->
+                <div class="conf-photo">
+                    <img src="MassRobotics2026.jpg" alt="MassRobotics Boston 2026 event photo" loading="lazy" decoding="async"
+                         onerror="this.hidden = true; this.nextElementSibling.hidden = false;"
+                         onload="this.hidden = false; this.nextElementSibling.hidden = true;">
+                    <span class="conf-photo-placeholder" hidden>Photo coming soon</span>
+                </div>
                 <strong>MassRobotics Boston 2026</strong>
                 <p>Form &amp; Function Robotics Challenge Competition</p>
             </div>
