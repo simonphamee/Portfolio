@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,21 +16,11 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- Favicon: signal-line monogram -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b2447'/%3E%3Cpath d='M5 16 h4 l2 -7 3 14 3 -10 2 6 h8' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23080808'/%3E%3Cpath d='M5 16 h4 l2 -7 3 14 3 -10 2 6 h8' fill='none' stroke='%23d9d9d9' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
 
     <!-- Prevent theme flash: set theme before first paint -->
     <script>
-        (function () {
-            try {
-                var t = localStorage.getItem('theme');
-                if (!t) {
-                    t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                }
-                document.documentElement.setAttribute('data-theme', t);
-            } catch (e) {
-                document.documentElement.setAttribute('data-theme', 'light');
-            }
-        })();
+        document.documentElement.setAttribute('data-theme', 'dark');
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,43 +32,40 @@
            DESIGN TOKENS
            ============================================================ */
         :root {
-            /* Brand palette — deep blues, slate grays, crisp whites */
-            --navy-900: #060b16;
-            --navy-800: #0b1424;
-            --navy-700: #102a4c;
-            --blue-600: #1d4ed8;
-            --blue-500: #2563eb;
-            --blue-400: #3b82f6;
-            --sky-400:  #38bdf8;
+            --navy-900: #050505;
+            --navy-800: #0a0a0a;
+            --navy-700: #141414;
+            --blue-600: #252525;
+            --blue-500: #303030;
+            --blue-400: #444444;
+            --sky-400:  #a8a8a8;
 
-            /* Light theme (default) */
-            --bg:          #eef2f8;
-            --bg-grad-1:   #e8eef7;
-            --bg-grad-2:   #f4f7fc;
-            --surface:     #ffffff;
-            --surface-2:   #f6f9fd;
-            --surface-3:   #eef3fa;
-            --text:        #0b1220;
-            --text-soft:   #2b3648;
-            --text-muted:  #5a6678;
-            --heading:     #0d2748;
-            --primary:     #102a4c;
-            --accent:      #2563eb;
-            --accent-soft: #3b82f6;
-            --border:      #dde5f0;
-            --border-strong: #c9d5e6;
-            --code-bg:     #0b1220;
-            --code-bar:    #131e33;
-            --code-text:   #cdd9ec;
-            --ring:        rgba(37, 99, 235, 0.40);
+            --bg:          #050505;
+            --bg-grad-1:   #090909;
+            --bg-grad-2:   #0c0c0c;
+            --surface:     #0d0d0d;
+            --surface-2:   #151515;
+            --surface-3:   #1c1c1c;
+            --text:        #f2f2f2;
+            --text-soft:   #d0d0d0;
+            --text-muted:  #909090;
+            --heading:     #ffffff;
+            --primary:     #f5f5f5;
+            --accent:      #d9d9d9;
+            --accent-soft: #a8a8a8;
+            --border:      #242424;
+            --border-strong: #383838;
+            --code-bg:     #080808;
+            --code-bar:    #111111;
+            --code-text:   #e1e1e1;
+            --ring:        rgba(255, 255, 255, 0.24);
 
-            --shadow-sm: 0 1px 2px rgba(13, 39, 72, 0.06);
-            --shadow-md: 0 6px 18px -8px rgba(13, 39, 72, 0.18), 0 2px 6px -2px rgba(13, 39, 72, 0.08);
-            --shadow-lg: 0 22px 48px -20px rgba(13, 39, 72, 0.30), 0 8px 18px -10px rgba(13, 39, 72, 0.14);
-            --nav-bg:    rgba(255, 255, 255, 0.72);
-            --nav-bg-scrolled: rgba(255, 255, 255, 0.88);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.55);
+            --shadow-md: 0 8px 22px -10px rgba(0, 0, 0, 0.70);
+            --shadow-lg: 0 26px 56px -24px rgba(0, 0, 0, 0.82);
+            --nav-bg:    rgba(5, 5, 5, 0.82);
+            --nav-bg-scrolled: rgba(5, 5, 5, 0.96);
 
-            /* Type scale (fluid) */
             --fs-hero:   clamp(2.2rem, 1.4rem + 3.4vw, 3.4rem);
             --fs-h2:     clamp(1.45rem, 1.15rem + 1.2vw, 1.9rem);
             --fs-h3:     clamp(1.05rem, 0.96rem + 0.4vw, 1.2rem);
@@ -86,7 +73,6 @@
             --fs-sm:     0.92rem;
             --fs-xs:     0.8rem;
 
-            /* Spacing & shape */
             --radius-sm: 10px;
             --radius:    16px;
             --radius-lg: 22px;
@@ -99,31 +85,31 @@
         }
 
         [data-theme="dark"] {
-            --bg:          #060b16;
-            --bg-grad-1:   #07101f;
-            --bg-grad-2:   #0a1322;
-            --surface:     #0e1828;
-            --surface-2:   #111e33;
-            --surface-3:   #16243c;
-            --text:        #e7eefb;
-            --text-soft:   #c2cfe4;
-            --text-muted:  #8a9bb6;
-            --heading:     #dbe7fb;
-            --primary:     #cfe0fb;
-            --accent:      #5b9bff;
-            --accent-soft: #7cb1ff;
-            --border:      #1d2c45;
-            --border-strong: #283a58;
-            --code-bg:     #060d18;
-            --code-bar:    #0d1828;
-            --code-text:   #cdd9ec;
-            --ring:        rgba(91, 155, 255, 0.45);
+            --bg:          #050505;
+            --bg-grad-1:   #090909;
+            --bg-grad-2:   #0c0c0c;
+            --surface:     #0d0d0d;
+            --surface-2:   #151515;
+            --surface-3:   #1c1c1c;
+            --text:        #f2f2f2;
+            --text-soft:   #d0d0d0;
+            --text-muted:  #909090;
+            --heading:     #ffffff;
+            --primary:     #f5f5f5;
+            --accent:      #d9d9d9;
+            --accent-soft: #a8a8a8;
+            --border:      #242424;
+            --border-strong: #383838;
+            --code-bg:     #080808;
+            --code-bar:    #111111;
+            --code-text:   #e1e1e1;
+            --ring:        rgba(255, 255, 255, 0.24);
 
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
-            --shadow-md: 0 8px 22px -10px rgba(0, 0, 0, 0.6);
-            --shadow-lg: 0 26px 56px -24px rgba(0, 0, 0, 0.72), 0 0 0 1px rgba(91, 155, 255, 0.04);
-            --nav-bg:    rgba(8, 15, 28, 0.62);
-            --nav-bg-scrolled: rgba(8, 15, 28, 0.85);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.55);
+            --shadow-md: 0 8px 22px -10px rgba(0, 0, 0, 0.70);
+            --shadow-lg: 0 26px 56px -24px rgba(0, 0, 0, 0.82);
+            --nav-bg:    rgba(5, 5, 5, 0.82);
+            --nav-bg-scrolled: rgba(5, 5, 5, 0.96);
         }
 
         /* ============================================================
@@ -157,7 +143,7 @@
 
         a { color: var(--accent); }
 
-        ::selection { background: rgba(37, 99, 235, 0.22); }
+        ::selection { background: rgba(255, 255, 255, 0.12); }
 
         :focus-visible {
             outline: 2px solid var(--accent);
@@ -225,7 +211,7 @@
         .nav-logo .logo-mark {
             width: 26px; height: 26px;
             border-radius: 7px;
-            background: linear-gradient(140deg, var(--blue-600), var(--sky-400));
+            background: linear-gradient(140deg, #1b1b1b, #444444);
             display: grid; place-items: center;
             box-shadow: var(--shadow-sm);
         }
@@ -250,7 +236,7 @@
             left: 12px; right: 12px; bottom: 4px;
             height: 2px;
             border-radius: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--sky-400));
+            background: linear-gradient(90deg, #f0f0f0, #8f8f8f);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform var(--t);
@@ -316,7 +302,7 @@
             left: 0; bottom: 0;
             width: 56px; height: 3px;
             border-radius: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--sky-400));
+            background: linear-gradient(90deg, #f0f0f0, #8f8f8f);
         }
 
         /* ============================================================
@@ -327,7 +313,7 @@
             gap: clamp(24px, 4vw, 52px);
             align-items: center;
             background:
-                linear-gradient(135deg, rgba(37,99,235,0.05), transparent 45%),
+                linear-gradient(135deg, rgba(255,255,255,0.025), transparent 45%),
                 var(--surface);
             padding: clamp(26px, 3vw, 48px);
             border-radius: var(--radius-lg);
@@ -361,7 +347,7 @@
         .hero-accent-line {
             width: 64px; height: 4px;
             border-radius: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--sky-400));
+            background: linear-gradient(90deg, #f0f0f0, #8f8f8f);
             margin: 12px 0 18px;
         }
         .hero-subtitle {
@@ -403,7 +389,7 @@
             position: absolute;
             inset: -8px;
             border-radius: 50%;
-            background: conic-gradient(from 140deg, var(--blue-500), var(--sky-400), var(--blue-600), var(--blue-500));
+            background: conic-gradient(from 140deg, #4a4a4a, #8a8a8a, #252525, #4a4a4a);
             z-index: 0;
             opacity: 0.85;
             filter: blur(0.5px);
@@ -458,13 +444,13 @@
         }
         .btn:active { transform: translateY(0); }
         .btn-primary {
-            background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+            background: linear-gradient(135deg, #2b2b2b, #171717);
             color: #fff;
-            box-shadow: 0 10px 22px -12px rgba(37, 99, 235, 0.75);
+            box-shadow: 0 10px 22px -12px rgba(0,0,0,0.70);
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 16px 30px -14px rgba(37, 99, 235, 0.85);
+            box-shadow: 0 16px 30px -14px rgba(0,0,0,0.82);
         }
         .btn-secondary {
             background: var(--surface);
@@ -932,10 +918,6 @@
                 <a href="#projects">Projects</a>
                 <a href="#skills">Skills</a>
             </div>
-            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
-                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg>
-            </button>
         </div>
     </div>
 </nav>
@@ -1111,10 +1093,14 @@
                         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="15" height="15" rx="2"/><path d="M17 3H5a2 2 0 0 0-2 2v12M6 17l4-4 4 4 3-3 4 4"/><circle cx="16" cy="11" r="1"/></svg>
                         View Photos
                     </button>
+                    <a href="https://github.com/simonphamee/Drone-Health-Controller/blob/main/PrototypeFirmware.ino" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                        <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .7a11.3 11.3 0 0 0-3.6 22c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.4 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.3 11.3 0 0 0 12 .7z"/></svg>
+                        View Firmware
+                    </a>
                 </div>
             </div>
             <div class="project-media">
-                <img src="flightcontroller.jpg" alt="STM32-based drone telemetry monitoring hardware" onerror="imgFallback(this)">
+                <img src="flightcontroller1.jpg" alt="Drone health monitoring dashboard" onerror="imgFallback(this)">
             </div>
         </div>
 
@@ -1349,10 +1335,16 @@
             title: 'STM32 Drone Health Monitoring System',
             photos: [
                 {
-                    src: 'flightcontroller.jpg',
-                    alt: 'STM32-based drone telemetry monitoring hardware',
-                    title: 'Drone health monitoring hardware',
-                    description: 'Hardware for the drone health monitoring system. The project processes ESC telemetry and displays drone health in a local Python interface.'
+                    src: 'flightcontroller1.jpg',
+                    alt: 'Drone health monitoring dashboard showing battery, motor, and system health',
+                    title: 'Drone Health Dashboard',
+                    description: 'Local dashboard for viewing battery voltage, current, motor temperature, RPM, and overall drone health.'
+                },
+                {
+                    src: 'flightcontroller2.png',
+                    alt: 'Drone health monitoring system architecture block diagram',
+                    title: 'System Architecture',
+                    description: 'System block diagram showing the battery, sensors, STM32 microcontroller, ESC, ground station, CSV logging, and health analysis flow.'
                 }
             ]
         },
@@ -1535,20 +1527,9 @@
         // Native modal dialogs keep keyboard focus inside and make the page inert.
     })();
 
-    /* ---------- Theme toggle (persistent) ---------- */
-    const themeToggle = document.getElementById('themeToggle');
-    function setTheme(t) {
-        document.documentElement.setAttribute('data-theme', t);
-        try { localStorage.setItem('theme', t); } catch (e) {}
-        themeToggle.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-    }
-    themeToggle.addEventListener('click', function () {
-        const current = document.documentElement.getAttribute('data-theme');
-        setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-    setTheme(document.documentElement.getAttribute('data-theme') || 'light');
+        document.documentElement.setAttribute('data-theme', 'dark');
 
-    /* ---------- Nav: shadow on scroll + scroll-spy ---------- */
+/* ---------- Nav: shadow on scroll + scroll-spy ---------- */
     const nav = document.getElementById('siteNav');
     window.addEventListener('scroll', function () {
         nav.classList.toggle('scrolled', window.scrollY > 8);
